@@ -11,15 +11,15 @@ const Home = () => {
     <Wrapper>
       <div className="section section--1">
         <img className="img" src={img1} alt="for dogs" />
-        <Link to="/" className="btn">
-          <h1>
+        <Link to="/dog" className="btn">
+          <h1 name="dog">
             for <span>dog</span>
           </h1>
         </Link>
       </div>
       <div className="section section--2">
         <img className="img" src={img2} alt="for cats" />
-        <Link to="/" className="btn">
+        <Link to="/cat" className="btn">
           <h1>
             for <span>cat</span>
           </h1>
@@ -27,15 +27,15 @@ const Home = () => {
       </div>
       <div className="section section--3">
         <img className="img" src={img3} alt="all products" />
-        <Link to="/" className="btn">
+        <Link to="/all" className="btn">
           <h1>
-            <span>all</span>
+            <span>all</span> products
           </h1>
         </Link>
       </div>
       <div className="section section--4">
         <img className="img" src={img4} alt="about" />
-        <Link to="/" className="btn">
+        <Link to="/about" className="btn">
           <h1>
             <span>about</span>
           </h1>

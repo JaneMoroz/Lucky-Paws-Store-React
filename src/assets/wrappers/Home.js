@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 const Wrapper = styled.div`
   height: calc(100vh - 8rem);
+  min-height: 60rem;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
@@ -59,6 +60,15 @@ const Wrapper = styled.div`
 
   .btn:hover h1::after {
     width: 100%;
+  }
+
+  .img {
+    transform: scale(100%);
+    transition: all 0.4s;
+  }
+
+  .section:hover .img {
+    transform: scale(105%);
   }
 `;
 
