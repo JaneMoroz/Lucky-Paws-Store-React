@@ -19,9 +19,9 @@ const Navbar = () => {
         <button className="btn" type="button">
           <HiOutlineHeart className="icon" />
         </button>
-        <button className="btn" type="button">
+        <Link to="/account" className="btn">
           <HiOutlineUserCircle className="icon" />
-        </button>
+        </Link>
         <button className="btn" type="button">
           <HiOutlineShoppingBag className="icon" />
           <span className="cart">1</span>

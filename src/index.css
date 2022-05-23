@@ -113,7 +113,52 @@ ul {
   border: none;
 }
 
+.btn--outlined {
+  font-size: 1.8rem;
+  font-weight: 300;
+  padding: 0.8rem 2.4rem;
+  color: var(--color-text-primary);
+  text-transform: lowercase;
+  border: 1px solid var(--color-text-primary);
+  transition: all 0.3s;
+}
+
+.btn--outlined:hover {
+  background-color: var(--color-text-primary);
+  color: #fff;
+}
+
+.btn--text {
+  color: var(--color-text-primary);
+}
+
 /* form */
+
+.form {
+  width: 30rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.form-input {
+  border: none;
+  border-bottom: 1px solid var(--color-grey);
+}
+.form-input {
+  width: 100%;
+  font-size: 1.6rem;
+  line-height: 2;
+  color: var(--color-text-secondary);
+}
+
+.form-row {
+  width: 100%;
+  min-height: 5.6rem;
+}
+
+::placeholder {
+  text-transform: capitalize;
+}
 
 .container {
   margin: 0 auto;
