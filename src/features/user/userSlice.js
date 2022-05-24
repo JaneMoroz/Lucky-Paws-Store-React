@@ -23,7 +23,7 @@ export const registerUser = createAsyncThunk(
       };
       return { userData };
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data.msg);
+      return thunkAPI.rejectWithValue(error.response.data.message);
     }
   }
 );
@@ -40,7 +40,7 @@ export const loginUser = createAsyncThunk(
       };
       return { userData };
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data.msg);
+      return thunkAPI.rejectWithValue(error.response.data.message);
     }
   }
 );
@@ -67,7 +67,6 @@ const userSlice = createSlice({
       state.isLoading = true;
     },
     [loginUser.fulfilled]: (state, { payload }) => {
-      console.log(payload);
       const { userData } = payload;
       console.log(userData);
       state.isLoading = false;
