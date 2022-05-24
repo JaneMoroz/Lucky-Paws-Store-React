@@ -78,7 +78,7 @@ const Auth = () => {
         {!values.isMember && (
           <FormRow
             type="password"
-            name="confirm password"
+            name="passwordConfirm"
             value={values.passwordConfirm}
             handleChange={handleChange}
           />

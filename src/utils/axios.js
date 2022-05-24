@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const customFetch = axios.create({
-  baseURL: "https://arcane-mountain-53457.herokuapp.com/api/v1",
+  baseURL: process.env.REACT_APP_API_URL,
 });
 
 export default customFetch;

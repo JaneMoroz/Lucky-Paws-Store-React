@@ -17,11 +17,11 @@ export const registerUser = createAsyncThunk(
     try {
       const res = await customFetch.post("/users/signup", user);
       const userData = {
-        token: res.token,
-        name: res.data.user.name,
-        email: res.data.user.email,
+        token: res.data.token,
+        name: res.data.data.user.name,
+        email: res.data.data.user.email,
       };
-      return userData;
+      return { userData };
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data.msg);
     }
@@ -34,11 +34,11 @@ export const loginUser = createAsyncThunk(
     try {
       const res = await customFetch.post("/users/login", user);
       const userData = {
-        token: res.token,
-        name: res.data.user.name,
-        email: res.data.user.email,
+        token: res.data.token,
+        name: res.data.data.user.name,
+        email: res.data.data.user.email,
       };
-      return userData;
+      return { userData };
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data.msg);
     }
@@ -53,11 +53,11 @@ const userSlice = createSlice({
       state.isLoading = true;
     },
     [registerUser.fulfilled]: (state, { payload }) => {
-      const { user } = payload;
+      const { userData } = payload;
       state.isLoading = false;
-      state.user = user;
-      addUserToLocalStorage(user);
-      toast.success(`Hello There ${user.name}`);
+      state.user = userData;
+      addUserToLocalStorage(userData);
+      toast.success(`Hello There ${userData.name}`);
     },
     [registerUser.rejected]: (state, { payload }) => {
       state.isLoading = false;
@@ -67,15 +67,16 @@ const userSlice = createSlice({
       state.isLoading = true;
     },
     [loginUser.fulfilled]: (state, { payload }) => {
-      const { user } = payload;
+      console.log(payload);
+      const { userData } = payload;
+      console.log(userData);
       state.isLoading = false;
-      state.user = user;
-      addUserToLocalStorage(user);
-      toast.success(`Welcome Back ${user.name}`);
+      state.user = userData;
+      addUserToLocalStorage(userData);
+      toast.success(`Welcome Back ${userData.name}`);
     },
     [loginUser.rejected]: (state, { payload }) => {
       state.isLoading = false;
-      console.log("regected");
       toast.error(payload);
     },
   },
