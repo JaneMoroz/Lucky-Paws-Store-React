@@ -3,5 +3,6 @@ import Auth from "./Auth";
 import UserAccount from "./UserAccount";
 import FormRow from "./FormRow";
 import PageHero from "./PageHero";
+import UserNavigation from "./UserNavigation";
 
-export { Navbar, Auth, UserAccount, FormRow, PageHero };
+export { Navbar, Auth, UserAccount, FormRow, PageHero, UserNavigation };
