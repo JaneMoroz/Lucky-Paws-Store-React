@@ -2,8 +2,12 @@ import React from "react";
 import Wrapper from "../assets/wrappers/UserNavigation";
 import { userLinks, adminLinks } from "../utils/links";
 import { BsKeyFill } from "react-icons/bs";
+import { HiLogout } from "react-icons/hi";
+import { useDispatch } from "react-redux";
+import { logoutUser } from "../features/user/userSlice";
 
 const UserNavigation = () => {
+  const dispatch = useDispatch();
   return (
     <Wrapper>
       <div className="menu">
@@ -15,6 +19,17 @@ const UserNavigation = () => {
             </div>
           );
         })}
+        <div className="menu-item">
+          <span className="icon">
+            <HiLogout />
+          </span>
+          <button
+            className="btn btn--text"
+            onClick={() => dispatch(logoutUser("Logging out..."))}
+          >
+            log out
+          </button>
+        </div>
       </div>
       <hr />
       <div className="menu">

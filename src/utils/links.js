@@ -6,7 +6,6 @@ export const userLinks = [
   { id: 2, text: "my orders", path: "/my-orders", icon: <BsCart /> },
   { id: 3, text: "my reviews", path: "/my-reviews", icon: <BsStar /> },
   { id: 4, text: "billing", path: "/my-orders", icon: <BsCreditCard /> },
-  { id: 5, text: "log out", path: "/logout", icon: <HiLogout /> },
 ];
 
 export const adminLinks = [
