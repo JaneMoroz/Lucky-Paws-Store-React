@@ -4,7 +4,7 @@ import Wrapper from "../assets/wrappers/UserAccount";
 import FormRow from "./FormRow";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { updateUser } from "../features/user/userSlice";
+import { updateUser, updateUserPassword } from "../features/user/userSlice";
 
 const UserAccount = () => {
   const { isLoading, user } = useSelector((store) => store.user);
@@ -19,6 +19,9 @@ const UserAccount = () => {
         ? user.photo
         : `${process.env.REACT_APP_CLIENT_URL}/img/users/${user.photo}`
     }`,
+    passwordCurrent: "",
+    password: "",
+    passwordConfirm: "",
   });
 
   useEffect(() => {
@@ -43,6 +46,19 @@ const UserAccount = () => {
     dispatch(updateUser(userForm));
   };
 
+  const handlePasswordSubmit = (e) => {
+    e.preventDefault();
+    const { passwordCurrent, password, passwordConfirm } = userData;
+    if (!passwordCurrent || !password || !passwordConfirm) {
+      toast.error("please fill out all fields");
+      return;
+    }
+
+    dispatch(
+      updateUserPassword({ passwordCurrent, password, passwordConfirm })
+    );
+  };
+
   const handleChange = (e) => {
     const name = e.target.name;
     let value = "";
@@ -58,46 +74,81 @@ const UserAccount = () => {
   return (
     <Wrapper>
       <UserNavigation />
-      <form className="form" onSubmit={handleSubmit}>
-        <h2>Your account settings</h2>
-        <div className="form-center">
-          <FormRow
-            type="text"
-            name="name"
-            value={userData.name}
-            handleChange={handleChange}
-          />
-          <FormRow
-            type="email"
-            name="name"
-            value={userData.email}
-            handleChange={handleChange}
-          />
-          <div className="image-row">
-            <img
-              className="form-photo"
-              src={userData.photoUrl}
-              alt={userData.name}
+      <div>
+        <form className="form" onSubmit={handleSubmit}>
+          <h2>Your account settings</h2>
+          <div className="form-center">
+            <FormRow
+              type="text"
+              name="name"
+              value={userData.name}
+              handleChange={handleChange}
             />
-            <input
-              className="form-upload"
-              type="file"
-              accept="image/*"
-              name="photo"
-              id="photo"
-              onChange={handleChange}
+            <FormRow
+              type="email"
+              name="name"
+              value={userData.email}
+              handleChange={handleChange}
             />
-            <label htmlFor="photo">Choose new photo</label>
+            <div className="image-row">
+              <img
+                className="form-photo"
+                src={userData.photoUrl}
+                alt={userData.name}
+              />
+              <input
+                className="form-upload"
+                type="file"
+                accept="image/*"
+                name="photo"
+                id="photo"
+                onChange={handleChange}
+              />
+              <label htmlFor="photo">Choose new photo</label>
+            </div>
           </div>
-        </div>
-        <button
-          type="submit"
-          className="btn btn--outlined"
-          disabled={isLoading}
-        >
-          {isLoading ? "updating..." : "save settings"}
-        </button>
-      </form>
+          <button
+            type="submit"
+            className="btn btn--outlined"
+            disabled={isLoading}
+          >
+            {isLoading ? "updating..." : "save settings"}
+          </button>
+        </form>
+        <hr />
+        <form className="form" onSubmit={handlePasswordSubmit}>
+          <h2>Your Password settings</h2>
+          <div className="form-center">
+            <FormRow
+              type="password"
+              name="passwordCurrent"
+              placeholderText="current password"
+              value={userData.passwordCurrent}
+              handleChange={handleChange}
+            />
+            <FormRow
+              type="password"
+              name="password"
+              value={userData.password}
+              handleChange={handleChange}
+            />
+            <FormRow
+              type="password"
+              name="passwordConfirm"
+              placeholderText="confirm password"
+              value={userData.passwordConfirm}
+              handleChange={handleChange}
+            />
+          </div>
+          <button
+            type="submit"
+            className="btn btn--outlined"
+            disabled={isLoading}
+          >
+            {isLoading ? "updating..." : "save password"}
+          </button>
+        </form>
+      </div>
     </Wrapper>
   );
 };
