@@ -21,6 +21,12 @@ const Wrapper = styled.nav`
     }
   }
 
+  .btns-container {
+    display: flex;
+    column-gap: 1rem;
+    align-items: center;
+  }
+
   .btn {
     position: relative;
   }

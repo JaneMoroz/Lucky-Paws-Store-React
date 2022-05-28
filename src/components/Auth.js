@@ -79,6 +79,7 @@ const Auth = () => {
           <FormRow
             type="password"
             name="passwordConfirm"
+            placeholderText="confirm password"
             value={values.passwordConfirm}
             handleChange={handleChange}
           />

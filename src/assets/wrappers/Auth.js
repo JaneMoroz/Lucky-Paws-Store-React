@@ -4,7 +4,7 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 60rem;
+  margin-top: 5.6rem;
 
   h2 {
     color: var(--color-text-primary);

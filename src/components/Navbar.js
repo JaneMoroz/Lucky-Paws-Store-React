@@ -15,7 +15,7 @@ const Navbar = () => {
           Lucky Paws
         </Link>
       </div>
-      <div>
+      <div className="btns-container">
         <button className="btn" type="button">
           <HiOutlineHeart className="icon" />
         </button>

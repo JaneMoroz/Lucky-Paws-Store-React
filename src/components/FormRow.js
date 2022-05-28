@@ -1,6 +1,6 @@
 import React from "react";
 
-const FormRow = ({ type, name, value, handleChange }) => {
+const FormRow = ({ type, name, value, handleChange, placeholderText }) => {
   return (
     <div className="form-row">
       <input
@@ -9,7 +9,7 @@ const FormRow = ({ type, name, value, handleChange }) => {
         value={value}
         onChange={handleChange}
         className="form-input"
-        placeholder={name}
+        placeholder={placeholderText ? placeholderText : name}
       />
     </div>
   );

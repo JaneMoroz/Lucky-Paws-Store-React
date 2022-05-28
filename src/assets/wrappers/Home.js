@@ -43,25 +43,6 @@ const Wrapper = styled.div`
     background-color: var(--background-4);
   }
 
-  h1 {
-    position: relative;
-  }
-
-  h1::after {
-    position: absolute;
-    content: "";
-    bottom: 0;
-    left: 0;
-    width: 0%;
-    height: 1px;
-    background-color: #fff;
-    transition: all 0.3s;
-  }
-
-  .btn:hover h1::after {
-    width: 100%;
-  }
-
   .img {
     transform: scale(100%);
     transition: all 0.4s;
