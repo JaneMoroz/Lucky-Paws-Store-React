@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
-import UserNavigation from "./UserNavigation";
-import Wrapper from "../assets/wrappers/UserAccount";
-import FormRow from "./FormRow";
+import Wrapper from "../../assets/wrappers/Settings";
+import FormRow from "../../components/FormRow";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { updateUser, updateUserPassword } from "../features/user/userSlice";
+import { updateUser, updateUserPassword } from "../../features/user/userSlice";
 
-const UserAccount = () => {
+const Settings = () => {
   const { isLoading, user } = useSelector((store) => store.user);
   const dispatch = useDispatch();
 
@@ -57,6 +56,10 @@ const UserAccount = () => {
     dispatch(
       updateUserPassword({ passwordCurrent, password, passwordConfirm })
     );
+    userData.passwordCurrent =
+      userData.password =
+      userData.passwordConfirm =
+        "";
   };
 
   const handleChange = (e) => {
@@ -73,7 +76,6 @@ const UserAccount = () => {
 
   return (
     <Wrapper>
-      <UserNavigation />
       <div>
         <form className="form" onSubmit={handleSubmit}>
           <h2>Your account settings</h2>
@@ -153,4 +155,4 @@ const UserAccount = () => {
   );
 };
 
-export default UserAccount;
+export default Settings;

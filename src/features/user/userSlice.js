@@ -59,13 +59,13 @@ export const updateUser = createAsyncThunk(
       if (error.response.status === 401) {
         return thunkAPI.rejectWithValue("Unauthorized! Logging Out...");
       }
-      return thunkAPI.rejectWithValue(error.response.data.msg);
+      return thunkAPI.rejectWithValue(error.response.data.message);
     }
   }
 );
 
 export const updateUserPassword = createAsyncThunk(
-  "user/updateUser",
+  "user/updateUserPassword",
   async (passwords, thunkAPI) => {
     try {
       const res = await customFetch.patch("/users/updateMyPassword", passwords);
@@ -75,7 +75,7 @@ export const updateUserPassword = createAsyncThunk(
       if (error.response.status === 401) {
         return thunkAPI.rejectWithValue("Unauthorized! Logging Out...");
       }
-      return thunkAPI.rejectWithValue(error.response.data.msg);
+      return thunkAPI.rejectWithValue(error.response.data.message);
     }
   }
 );

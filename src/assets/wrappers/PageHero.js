@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 const Wrapper = styled.div`
+  grid-column: 1 / -1;
   text-align: center;
   h1 {
     color: var(--color-text-primary-light);

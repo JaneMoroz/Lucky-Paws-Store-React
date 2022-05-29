@@ -10,7 +10,7 @@ const UserNavigation = () => {
   const dispatch = useDispatch();
   return (
     <Wrapper>
-      <div className="menu">
+      <div className="menu menu--user">
         {userLinks.map((link) => {
           return (
             <div key={link.id} className="menu-item">

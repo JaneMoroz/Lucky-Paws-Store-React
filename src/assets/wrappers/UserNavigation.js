@@ -1,11 +1,17 @@
 import styled from "styled-components";
 
 const Wrapper = styled.div`
+  grid-row: 2;
+  grid-column: 1;
   .menu {
     display: flex;
     flex-direction: column;
     row-gap: 1.4rem;
-    padding: 1.8rem 0;
+    padding: 2.4rem 2.4rem 0 0;
+  }
+
+  .menu--user {
+    margin-top: 2.4rem;
   }
 
   .menu-item {

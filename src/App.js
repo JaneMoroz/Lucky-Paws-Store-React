@@ -1,8 +1,16 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { About, Account, Error, Home, Page } from "./pages/";
+import { About, Error, Home, Page } from "./pages/";
 import { Navbar } from "./components/";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import {
+  AddProduct,
+  ManageProducts,
+  MyOrders,
+  MyReviews,
+  Settings,
+  SharedLayout,
+} from "./pages/account/";
 
 function App() {
   return (
@@ -14,7 +22,13 @@ function App() {
         <Route path="cat" element={<Page />} />
         <Route path="about" element={<Page />} />
         <Route path="all" element={<Page />} />
-        <Route path="account" element={<Account />} />
+        <Route path="account" element={<SharedLayout />}>
+          <Route index element={<Settings />} />
+          <Route path="my-orders" element={<MyOrders />} />
+          <Route path="my-reviews" element={<MyReviews />} />
+          <Route path="manage-products" element={<ManageProducts />} />
+          <Route path="add-product" element={<AddProduct />} />
+        </Route>
         <Route path="about" element={<About />} />
         <Route path="*" element={<Error />} />
       </Routes>

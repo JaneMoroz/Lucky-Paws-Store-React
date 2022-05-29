@@ -1,8 +1,10 @@
 import React from "react";
-import { Auth, UserAccount, PageHero } from "../components/";
+import { Auth, PageHero, UserNavigation } from "../../components";
 import { useSelector } from "react-redux";
+import { Outlet } from "react-router-dom";
+import Wrapper from "../../assets/wrappers/SharedLayout";
 
-const Account = () => {
+const SharedLayout = () => {
   const { user } = useSelector((store) => store.user);
 
   if (!user) {
@@ -15,11 +17,12 @@ const Account = () => {
   }
 
   return (
-    <>
+    <Wrapper>
       <PageHero page={"account"} />
-      <UserAccount />
-    </>
+      <UserNavigation />
+      <Outlet />
+    </Wrapper>
   );
 };
 
-export default Account;
+export default SharedLayout;

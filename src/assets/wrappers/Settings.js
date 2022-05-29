@@ -1,11 +1,7 @@
 import styled from "styled-components";
 
 const Wrapper = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  padding: 2.4rem 6.4rem;
-  column-gap: 2rem;
-
+  padding: 2.4rem 3.2rem;
   h2 {
     font-size: 2.4rem;
     font-weight: 300;
