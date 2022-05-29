@@ -6,7 +6,7 @@ const Wrapper = styled.div`
   .menu {
     display: flex;
     flex-direction: column;
-    row-gap: 1.4rem;
+    row-gap: 1.8rem;
     padding: 2.4rem 2.4rem 0 0;
   }
 
@@ -39,6 +39,7 @@ const Wrapper = styled.div`
 
   .btn--logout {
     padding: 0;
+    margin-bottom: 1.2rem;
   }
 
   .admin {

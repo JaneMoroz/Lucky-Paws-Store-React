@@ -6,6 +6,7 @@ const Wrapper = styled.div`
     font-size: 2.4rem;
     font-weight: 300;
     color: var(--color-text-primary);
+    padding: 1.6rem 0;
   }
 
   .image-row {

@@ -2,6 +2,8 @@
 ::after,
 ::before {
   box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
 /* fonts */
@@ -45,6 +47,8 @@ html {
   --color-grey: #b2b2b2;
 
   /* rest of the colors */
+  --color-success: #8ac926;
+  --color-danger: #ff595e;
 
   /* fonts  */
   --font-logo: 3.2rem;
@@ -59,6 +63,7 @@ html {
 body {
   font-family: "Work Sans", sans-serif;
   font-weight: 400;
+  color: var(--color-text-secondary);
 }
 
 h1 {
@@ -157,6 +162,69 @@ ul {
   display: flex;
   column-gap: 1.2rem;
   color: var(--color-text-primary);
+}
+
+/* loader */
+
+.loader,
+.loader:before,
+.loader:after {
+  background: transparent;
+  -webkit-animation: load1 1s infinite ease-in-out;
+  animation: load1 1s infinite ease-in-out;
+  width: 1em;
+  height: 4em;
+}
+.loader {
+  color: var(--color-text-primary);
+  text-indent: -9999em;
+  margin: 88px auto;
+  margin-top: 20rem;
+  position: relative;
+  font-size: 3rem;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+}
+.loader:before,
+.loader:after {
+  position: absolute;
+  top: 0;
+  content: "";
+}
+.loader:before {
+  left: -1.5em;
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+.loader:after {
+  left: 1.5em;
+}
+@-webkit-keyframes load1 {
+  0%,
+  80%,
+  100% {
+    box-shadow: 0 0;
+    height: 4em;
+  }
+  40% {
+    box-shadow: 0 -2em;
+    height: 5em;
+  }
+}
+@keyframes load1 {
+  0%,
+  80%,
+  100% {
+    box-shadow: 0 0;
+    height: 4em;
+  }
+  40% {
+    box-shadow: 0 -2em;
+    height: 5em;
+  }
 }
 
 /* form */
