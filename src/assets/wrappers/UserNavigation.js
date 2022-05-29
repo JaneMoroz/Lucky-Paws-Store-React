@@ -16,9 +16,6 @@ const Wrapper = styled.div`
 
   .menu-item {
     font-size: 1.6rem;
-    display: flex;
-    align-items: center;
-    column-gap: 1rem;
     color: var(--color-text-secondary);
     transition: all 0.3s;
   }
@@ -38,6 +35,10 @@ const Wrapper = styled.div`
     text-transform: uppercase;
     color: inherit;
     white-space: nowrap;
+  }
+
+  .btn--logout {
+    padding: 0;
   }
 
   .admin {

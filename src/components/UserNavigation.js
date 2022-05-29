@@ -5,6 +5,7 @@ import { BsKeyFill } from "react-icons/bs";
 import { HiLogout } from "react-icons/hi";
 import { useDispatch } from "react-redux";
 import { logoutUser } from "../features/user/userSlice";
+import { NavLink } from "react-router-dom";
 
 const UserNavigation = () => {
   const dispatch = useDispatch();
@@ -14,19 +15,28 @@ const UserNavigation = () => {
         {userLinks.map((link) => {
           return (
             <div key={link.id} className="menu-item">
-              <span className="icon">{link.icon}</span>
-              <button className="btn btn--text">{link.text}</button>
+              <NavLink
+                to={link.path}
+                className={({ isActive }) => {
+                  return isActive
+                    ? "btn btn--text btn--active"
+                    : "btn btn--text";
+                }}
+              >
+                <span className="icon">{link.icon}</span>
+                {link.text}
+              </NavLink>
             </div>
           );
         })}
         <div className="menu-item">
-          <span className="icon">
-            <HiLogout />
-          </span>
           <button
-            className="btn btn--text"
+            className="btn btn--text btn--logout"
             onClick={() => dispatch(logoutUser("Logging out..."))}
           >
+            <span className="icon">
+              <HiLogout />
+            </span>
             log out
           </button>
         </div>
@@ -40,8 +50,17 @@ const UserNavigation = () => {
         {adminLinks.map((link) => {
           return (
             <div key={link.id} className="menu-item">
-              <span className="icon">{link.icon}</span>
-              <button className="btn btn--text">{link.text}</button>
+              <NavLink
+                to={link.path}
+                className={({ isActive }) => {
+                  return isActive
+                    ? "btn btn--text btn--active"
+                    : "btn btn--text";
+                }}
+              >
+                <span className="icon">{link.icon}</span>
+                {link.text}
+              </NavLink>
             </div>
           );
         })}

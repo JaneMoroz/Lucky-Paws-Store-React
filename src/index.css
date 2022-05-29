@@ -154,6 +154,8 @@ ul {
 }
 
 .btn--text {
+  display: flex;
+  column-gap: 1.2rem;
   color: var(--color-text-primary);
 }
 
