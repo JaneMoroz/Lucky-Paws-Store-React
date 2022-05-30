@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 const initialState = {
   isLoading: false,
   orders: [],
+  order: null,
 };
 
 export const getMyOrders = createAsyncThunk(
@@ -20,6 +21,19 @@ export const getMyOrders = createAsyncThunk(
   }
 );
 
+export const getMyOrder = createAsyncThunk(
+  "user/getMyOrder",
+  async (id, thunkAPI) => {
+    try {
+      const res = await customFetch.get(`/order/myOrders/${id}`);
+      const orderData = res.data.data.data;
+      return { orderData };
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
 const orderSlice = createSlice({
   name: "order",
   initialState,
@@ -28,10 +42,21 @@ const orderSlice = createSlice({
       state.isLoading = true;
     },
     [getMyOrders.fulfilled]: (state, { payload }) => {
-      state.isLoading = false;
       state.orders = payload.ordersData;
+      state.isLoading = false;
     },
     [getMyOrders.rejected]: (state, { payload }) => {
+      state.isLoading = false;
+      toast.error(payload);
+    },
+    [getMyOrder.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [getMyOrder.fulfilled]: (state, { payload }) => {
+      state.order = payload.orderData;
+      state.isLoading = false;
+    },
+    [getMyOrder.rejected]: (state, { payload }) => {
       state.isLoading = false;
       toast.error(payload);
     },

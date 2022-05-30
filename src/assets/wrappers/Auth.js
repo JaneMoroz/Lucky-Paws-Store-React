@@ -6,17 +6,15 @@ const Wrapper = styled.div`
   justify-content: center;
   margin-top: 5.6rem;
 
-  h2 {
-    color: var(--color-text-primary);
-    margin-bottom: 2.4rem;
-  }
-
   .btn--outlined {
     margin-top: 1rem;
     align-self: stretch;
   }
 
   p {
+    display: flex;
+    column-gap: 1.2rem;
+    padding: 1.6rem 0;
     font-size: 1.8rem;
     color: var(--color-grey);
   }

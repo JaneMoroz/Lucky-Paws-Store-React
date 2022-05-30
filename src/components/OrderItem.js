@@ -24,7 +24,7 @@ const OrderItem = ({
     <Wrapper>
       <div className="order">
         <Link to={`${_id}`}>
-          <h4>{date}</h4>
+          <h3>{date}</h3>
         </Link>
 
         {cart.products.map((product, index) => {

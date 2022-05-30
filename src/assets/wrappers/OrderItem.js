@@ -2,16 +2,15 @@ import styled from "styled-components";
 
 const Wrapper = styled.div`
   border-bottom: 1px solid var(--color-grey);
-  h4 {
+  h3 {
     display: inline-block;
     position: relative;
     color: var(--color-text-primary);
-    margin: 0;
     padding-bottom: 1.2rem;
     transition: all 0.3s;
   }
 
-  h4::after {
+  h3::after {
     content: "";
     position: absolute;
     bottom: 1rem;
@@ -22,11 +21,11 @@ const Wrapper = styled.div`
     transition: all 0.3s;
   }
 
-  h4:hover {
+  h3:hover {
     color: var(--color-text-primary-light);
   }
 
-  h4:hover::after {
+  h3:hover::after {
     width: 100%;
   }
 
@@ -37,7 +36,7 @@ const Wrapper = styled.div`
     row-gap: 1rem;
     align-items: center;
     font-size: 1.6rem;
-    padding: 0.6rem 0;
+    padding: 0.6rem 2rem;
   }
 
   .title {
@@ -61,7 +60,9 @@ const Wrapper = styled.div`
     row-gap: 1rem;
     align-items: center;
     font-size: 1.6rem;
-    padding: 1rem 0;
+    padding: 1rem 2rem;
+    margin-top: 1.6rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   }
 
   .status p {

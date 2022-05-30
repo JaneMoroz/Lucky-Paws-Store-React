@@ -7,6 +7,7 @@ import {
   AddProduct,
   ManageProducts,
   MyOrders,
+  MyOrder,
   MyReviews,
   Settings,
   SharedLayout,
@@ -25,6 +26,7 @@ function App() {
         <Route path="account" element={<SharedLayout />}>
           <Route index element={<Settings />} />
           <Route path="my-orders" element={<MyOrders />} />
+          <Route path="my-orders/:id" element={<MyOrder />} />
           <Route path="my-reviews" element={<MyReviews />} />
           <Route path="manage-products" element={<ManageProducts />} />
           <Route path="add-product" element={<AddProduct />} />
