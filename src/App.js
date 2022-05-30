@@ -6,11 +6,14 @@ import "react-toastify/dist/ReactToastify.css";
 import {
   AddProduct,
   ManageProducts,
+  ManageReviews,
+  ManageOrders,
   MyOrders,
   MyOrder,
   MyReviews,
   Settings,
   SharedLayout,
+  ManageUsers,
 } from "./pages/account/";
 
 function App() {
@@ -29,6 +32,9 @@ function App() {
           <Route path="my-orders/:id" element={<MyOrder />} />
           <Route path="my-reviews" element={<MyReviews />} />
           <Route path="manage-products" element={<ManageProducts />} />
+          <Route path="manage-users" element={<ManageUsers />} />
+          <Route path="manage-reviews" element={<ManageReviews />} />
+          <Route path="manage-orders" element={<ManageOrders />} />
           <Route path="add-product" element={<AddProduct />} />
         </Route>
         <Route path="about" element={<About />} />

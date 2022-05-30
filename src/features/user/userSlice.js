@@ -10,6 +10,7 @@ import {
 const initialState = {
   isLoading: false,
   user: getUserFromLocalStorage(),
+  users: [],
 };
 
 export const registerUser = createAsyncThunk(
@@ -22,6 +23,7 @@ export const registerUser = createAsyncThunk(
         name: res.data.data.user.name,
         email: res.data.data.user.email,
         photo: res.data.data.user.photo,
+        role: res.data.data.user.role,
       };
       return { userData };
     } catch (error) {
@@ -40,6 +42,7 @@ export const loginUser = createAsyncThunk(
         name: res.data.data.user.name,
         email: res.data.data.user.email,
         photo: res.data.data.user.photo,
+        role: res.data.data.user.role,
       };
       return { userData };
     } catch (error) {
@@ -75,6 +78,19 @@ export const updateUserPassword = createAsyncThunk(
       if (error.response.status === 401) {
         return thunkAPI.rejectWithValue("Unauthorized! Logging Out...");
       }
+      return thunkAPI.rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
+export const getAllUsers = createAsyncThunk(
+  "user/getAllUsers",
+  async (_, thunkAPI) => {
+    try {
+      const res = await customFetch.get("/users");
+      const usersData = res.data.data.data;
+      return { usersData };
+    } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data.message);
     }
   }
@@ -148,6 +164,17 @@ const userSlice = createSlice({
       toast.success("Password updated!");
     },
     [updateUserPassword.rejected]: (state, { payload }) => {
+      state.isLoading = false;
+      toast.error(payload);
+    },
+    [getAllUsers.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [getAllUsers.fulfilled]: (state, { payload }) => {
+      state.users = payload.usersData;
+      state.isLoading = false;
+    },
+    [getAllUsers.rejected]: (state, { payload }) => {
       state.isLoading = false;
       toast.error(payload);
     },

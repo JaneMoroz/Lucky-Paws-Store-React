@@ -6,6 +6,7 @@ const initialState = {
   isLoading: false,
   orders: [],
   order: null,
+  allOrders: [],
 };
 
 export const getMyOrders = createAsyncThunk(
@@ -28,6 +29,19 @@ export const getMyOrder = createAsyncThunk(
       const res = await customFetch.get(`/order/myOrders/${id}`);
       const orderData = res.data.data.data;
       return { orderData };
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
+export const getAllOrders = createAsyncThunk(
+  "user/getAllOrders",
+  async (_, thunkAPI) => {
+    try {
+      const res = await customFetch.get("/order");
+      const ordersData = res.data.data.data;
+      return { ordersData };
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data.message);
     }
@@ -57,6 +71,17 @@ const orderSlice = createSlice({
       state.isLoading = false;
     },
     [getMyOrder.rejected]: (state, { payload }) => {
+      state.isLoading = false;
+      toast.error(payload);
+    },
+    [getAllOrders.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [getAllOrders.fulfilled]: (state, { payload }) => {
+      state.allOrders = payload.ordersData;
+      state.isLoading = false;
+    },
+    [getAllOrders.rejected]: (state, { payload }) => {
       state.isLoading = false;
       toast.error(payload);
     },

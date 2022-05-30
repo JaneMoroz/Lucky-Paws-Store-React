@@ -25,7 +25,6 @@ const MyOrder = () => {
     return;
   }
 
-  console.log(order);
   const { cart, created, isDelivered, isPaid, shippingAddress } = order;
   const date = moment(created).format("LLL");
 

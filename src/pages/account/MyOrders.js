@@ -20,12 +20,14 @@ const MyOrders = () => {
     return (
       <Wrapper>
         <h2>Your orders</h2>
-        <div className="orders-container">You have no orders.</div>
+        <div className="container">
+          <p className="empty">You have no orders.</p>
+          <button className="btn btn--outlined">back to store</button>
+        </div>
       </Wrapper>
     );
   }
 
-  console.log(orders);
   return (
     <Wrapper>
       <h2>Your orders</h2>

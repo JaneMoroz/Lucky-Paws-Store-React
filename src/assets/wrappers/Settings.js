@@ -1,8 +1,6 @@
 import styled from "styled-components";
 
 const Wrapper = styled.div`
-  padding: 2.4rem 3.2rem;
-
   .image-row {
     display: flex;
     align-items: center;

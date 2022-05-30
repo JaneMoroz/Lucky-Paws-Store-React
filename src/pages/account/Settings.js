@@ -14,7 +14,7 @@ const Settings = () => {
     email: user?.email || "",
     photo: null,
     photoUrl: `${
-      user.photo.startsWith("https://")
+      user.photo.startsWith("https://") === true
         ? user.photo
         : `${process.env.REACT_APP_CLIENT_URL}/img/users/${user.photo}`
     }`,
@@ -25,7 +25,11 @@ const Settings = () => {
 
   useEffect(() => {
     const name = "photoUrl";
-    const value = `${process.env.REACT_APP_CLIENT_URL}/img/users/${user.photo}`;
+    const value = `${
+      user.photo.startsWith("https://") === true
+        ? user.photo
+        : `${process.env.REACT_APP_CLIENT_URL}/img/users/${user.photo}`
+    }`;
     setUserData({ ...userData, [name]: value });
   }, [user.photo]);
 
