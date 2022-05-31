@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import Wrapper from "../assets/wrappers/Page";
-import { PageHero, Products } from "../components";
+import { PageHero, Products, FiltersPanel } from "../components";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts } from "../features/product/productSlice";
 
@@ -20,7 +20,7 @@ const Page = () => {
       {page === "/dog" && (
         <>
           <div className="page-container">
-            <h1>Filters Panel</h1>
+            <FiltersPanel />
             <div>
               <PageHero page={"for dogs"} type={"page"} />
               <Products products={products} />

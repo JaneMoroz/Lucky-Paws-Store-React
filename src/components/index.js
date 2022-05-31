@@ -7,6 +7,7 @@ import OrderItem from "./OrderItem";
 import Loader from "./Loader";
 import ManageItems from "./ManageItems";
 import Products from "./Products";
+import FiltersPanel from "./FiltersPanel";
 
 export {
   Navbar,
@@ -18,4 +19,5 @@ export {
   Loader,
   ManageItems,
   Products,
+  FiltersPanel,
 };

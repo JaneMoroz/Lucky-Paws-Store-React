@@ -7,7 +7,7 @@ const Wrapper = styled.div`
 
   .page-container {
     display: grid;
-    grid-template-columns: 30rem 1fr;
+    grid-template-columns: min-content 1fr;
     justify-items: center;
   }
 
