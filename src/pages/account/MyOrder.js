@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getMyOrder } from "../../features/order/orderSlice";
+import { getMyOrder, getOrderById } from "../../features/order/orderSlice";
 import { Loader } from "../../components";
 import Wrapper from "../../assets/wrappers/MyOrder";
 import moment from "moment";
@@ -14,8 +14,17 @@ const MyOrder = () => {
   const { user } = useSelector((store) => store.user);
 
   useEffect(() => {
-    dispatch(getMyOrder(id));
+    if (user.role === "user") {
+      dispatch(getMyOrder(id));
+    } else {
+      dispatch(getOrderById(id));
+    }
   }, [id]);
+
+  const [orderData, setOrderData] = useState({
+    isPaid: order?.isPaid || false,
+    isDelivered: order?.isDelivered || false,
+  });
 
   if (isLoading) {
     return <Loader />;
@@ -27,6 +36,12 @@ const MyOrder = () => {
 
   const { cart, created, isDelivered, isPaid, shippingAddress } = order;
   const date = moment(created).format("LLL");
+
+  const handleChange = (e) => {
+    let name = e.target.name;
+    let value = e.target.checked;
+    setOrderData({ ...orderData, [name]: value });
+  };
 
   return (
     <Wrapper>
@@ -70,27 +85,61 @@ const MyOrder = () => {
             <p>{user.name}</p>
             <p>{`${shippingAddress.address}, ${shippingAddress.city}, ${shippingAddress.postalCode}, ${shippingAddress.country}`}</p>
           </div>
-          <div className="order-status">
-            <div className="status">
-              <span
-                className={`square ${
-                  isPaid ? "square--success" : "square--danger"
-                }`}
-              ></span>{" "}
-              <span>Paid</span>
+          {user.role === "user" && (
+            <div className="order-status">
+              <div className="status">
+                <span
+                  className={`square ${
+                    isPaid ? "square--success" : "square--danger"
+                  }`}
+                ></span>{" "}
+                <span>Paid</span>
+              </div>
+              <div className="status">
+                <span
+                  className={`square ${
+                    isDelivered ? "square--success" : "square--danger"
+                  }`}
+                ></span>{" "}
+                <span>Delivered</span>
+              </div>
             </div>
-            <div className="status">
-              <span
-                className={`square ${
-                  isDelivered ? "square--success" : "square--danger"
-                }`}
-              ></span>{" "}
-              <span>Delivered</span>
+          )}
+          {user.role === "admin" && (
+            <div className="order-status">
+              <div className="form-check">
+                <input
+                  type="checkbox"
+                  name="isPaid"
+                  id="isPaid"
+                  onChange={handleChange}
+                  checked={orderData.isPaid}
+                />
+                <label htmlFor="isPaid">Paid</label>
+              </div>
+              <div className="form-check">
+                <input
+                  type="checkbox"
+                  name="isDelivered"
+                  id="isDelivered"
+                  onChange={handleChange}
+                  checked={orderData.isDelivered}
+                />
+                <label htmlFor="isDelivered">Delivered</label>
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
-      <Link to="/account/my-orders" className="btn btn--outlined">
+      <button className="btn btn--outlined">Save changes</button>
+      <Link
+        to={`${
+          user.role === "admin"
+            ? "/account/manage-orders"
+            : "/account/my-orders"
+        }`}
+        className="btn btn--outlined"
+      >
         back to orders
       </Link>
     </Wrapper>

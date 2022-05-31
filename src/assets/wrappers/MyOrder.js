@@ -62,6 +62,11 @@ const Wrapper = styled.div`
     column-gap: 1.2rem;
   }
 
+  .form-check {
+    display: flex;
+    column-gap: 1rem;
+  }
+
   .square {
     display: block;
     height: 1.4rem;

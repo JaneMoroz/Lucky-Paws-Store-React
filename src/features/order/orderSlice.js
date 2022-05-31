@@ -48,6 +48,19 @@ export const getAllOrders = createAsyncThunk(
   }
 );
 
+export const getOrderById = createAsyncThunk(
+  "user/getOrderById",
+  async (id, thunkAPI) => {
+    try {
+      const res = await customFetch.get(`/order/${id}`);
+      const orderData = res.data.data.data;
+      return { orderData };
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
 const orderSlice = createSlice({
   name: "order",
   initialState,
@@ -82,6 +95,17 @@ const orderSlice = createSlice({
       state.isLoading = false;
     },
     [getAllOrders.rejected]: (state, { payload }) => {
+      state.isLoading = false;
+      toast.error(payload);
+    },
+    [getOrderById.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [getOrderById.fulfilled]: (state, { payload }) => {
+      state.order = payload.orderData;
+      state.isLoading = false;
+    },
+    [getOrderById.rejected]: (state, { payload }) => {
       state.isLoading = false;
       toast.error(payload);
     },

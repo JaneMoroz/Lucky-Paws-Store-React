@@ -35,6 +35,7 @@ function App() {
           <Route path="manage-users" element={<ManageUsers />} />
           <Route path="manage-reviews" element={<ManageReviews />} />
           <Route path="manage-orders" element={<ManageOrders />} />
+          <Route path="manage-orders/:id" element={<MyOrder />} />
           <Route path="add-product" element={<AddProduct />} />
         </Route>
         <Route path="about" element={<About />} />
