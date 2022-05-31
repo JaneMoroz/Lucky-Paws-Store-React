@@ -2,10 +2,10 @@ import React from "react";
 import Wrapper from "../assets/wrappers/PageHero";
 import { Link } from "react-router-dom";
 
-const PageHero = ({ page }) => {
+const PageHero = ({ page, type }) => {
   return (
     <Wrapper>
-      <div className="section-center">
+      <div className={`section-center ${type === "page" && "page"}`}>
         <Link to="/" className="btn">
           <h1>Home</h1>
         </Link>

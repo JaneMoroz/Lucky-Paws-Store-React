@@ -6,6 +6,7 @@ import UserNavigation from "./UserNavigation";
 import OrderItem from "./OrderItem";
 import Loader from "./Loader";
 import ManageItems from "./ManageItems";
+import Products from "./Products";
 
 export {
   Navbar,
@@ -16,4 +17,5 @@ export {
   OrderItem,
   Loader,
   ManageItems,
+  Products,
 };

@@ -1,15 +1,21 @@
 import styled from "styled-components";
 
-const Wrapper = styled.nav`
-  height: calc(100vh - 8rem);
+const Wrapper = styled.div`
   min-height: 60rem;
   width: 100vw;
   position: relative;
+
+  .page-container {
+    display: grid;
+    grid-template-columns: 30rem 1fr;
+    justify-items: center;
+  }
 
   .background {
     position: absolute;
     height: 100%;
     width: 100%;
+    z-index: -1;
   }
 
   .background--1 {
