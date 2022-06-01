@@ -8,6 +8,7 @@ import Loader from "./Loader";
 import ManageItems from "./ManageItems";
 import Products from "./Products";
 import FiltersPanel from "./FiltersPanel";
+import Stars from "./Stars";
 
 export {
   Navbar,
@@ -20,4 +21,5 @@ export {
   ManageItems,
   Products,
   FiltersPanel,
+  Stars,
 };

@@ -2,6 +2,7 @@ import React from "react";
 import Wrapper from "../assets/wrappers/Products";
 import Stars from "../components/Stars";
 import { BsSearch } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 const Products = ({ products }) => {
   return (
@@ -12,9 +13,9 @@ const Products = ({ products }) => {
             <div key={index} className="product">
               <div className="image-container">
                 <img src={product.primaryImage} alt={product.name} />
-                <button className="btn search">
+                <Link to={`/products/${product._id}`} className="btn search">
                   <BsSearch />
-                </button>
+                </Link>
               </div>
               <div className="details">
                 <div>
@@ -31,7 +32,12 @@ const Products = ({ products }) => {
                   stars={product.ratingsAverage}
                   reviews={product.ratingsQuantity}
                 />
-                <button className="btn btn--outlined">details</button>
+                <Link
+                  to={`/products/${product._id}`}
+                  className="btn btn--outlined"
+                >
+                  details
+                </Link>
               </div>
             </div>
           );
