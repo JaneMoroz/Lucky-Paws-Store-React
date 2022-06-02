@@ -57,16 +57,30 @@ const AddProduct = () => {
 
     const newProduct = {
       name: name.toLowerCase(),
-      brand: brand.toLowerCase(),
+      brand: "",
       animal: [animal.toLowerCase()],
       type: type.toLowerCase(),
       // subType: subType.toLowerCase(),
       price: price,
       countInStock: countInStock,
-      features: [feature1, feature2, feature3, feature4],
+      features: [],
       primaryImage: primaryImage,
-      otherImages: [otherImage],
+      otherImages: [],
     };
+
+    [feature1, feature2, feature3, feature4].forEach((feature) => {
+      if (feature !== "") {
+        newProduct.features.push(feature);
+      }
+    });
+
+    if (brand !== "") {
+      newProduct.brand = brand.toLowerCase();
+    }
+
+    if (otherImage !== "") {
+      newProduct.otherImages.push(otherImage);
+    }
 
     dispatch(addNewProduct(newProduct));
     setProductData({
