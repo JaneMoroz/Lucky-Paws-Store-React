@@ -1,6 +1,7 @@
 import React from "react";
 import { FaEye, FaPencilAlt, FaRegTrashAlt } from "react-icons/fa";
 import Wrapper from "../assets/wrappers/ManageItems";
+import defaultImage from "../assets/images/default.jpg";
 
 const ManageItems = ({ items, type }) => {
   return (
@@ -23,7 +24,16 @@ const ManageItems = ({ items, type }) => {
         }
         return (
           <div key={index} className="item">
-            {itemData.image && <img src={itemData.image} alt={itemData.name} />}
+            {itemData.image && (
+              <img
+                src={itemData.image}
+                alt={itemData.name}
+                onError={({ currentTarget }) => {
+                  currentTarget.onerror = null; // prevents looping
+                  currentTarget.src = defaultImage;
+                }}
+              />
+            )}
             {itemData.rating && <h2>{itemData.rating}/5</h2>}
             <div className="text-container">
               <h3>{itemData.title}</h3>

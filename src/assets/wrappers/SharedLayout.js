@@ -5,6 +5,7 @@ const Wrapper = styled.div`
   grid-template-columns: 1fr 2fr;
   padding: 0 5.6rem;
   justify-items: center;
+  column-gap: 2.4rem;
 
   @media only screen and (max-width: 56.25em) {
     padding: 0 2.4rem;

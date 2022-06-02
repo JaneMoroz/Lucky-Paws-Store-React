@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts } from "../../features/product/productSlice";
 import { Loader, ManageItems, FormRow } from "../../components";
+import { Link } from "react-router-dom";
 
 const ManageProducts = () => {
   const { isLoading, products } = useSelector((store) => store.product);
@@ -20,8 +21,13 @@ const ManageProducts = () => {
 
   useEffect(() => {
     dispatch(getAllProducts());
-    setProductsData({ ...productsData, products });
   }, []);
+
+  useEffect(() => {
+    if (products.length !== 0) {
+      setProductsData({ ...productsData, products });
+    }
+  }, [products]);
 
   useEffect(() => {
     if (productsData.search) {
@@ -41,7 +47,7 @@ const ManageProducts = () => {
 
   if (productsData.products.length === 0) {
     return (
-      <div>
+      <div className="container--outlet">
         <h2>Manage Products</h2>
         <div className="container">
           <button className="btn btn--outlined">Add new product</button>
@@ -51,17 +57,19 @@ const ManageProducts = () => {
             value={productsData.search}
             handleChange={handleChange}
           />
-          <p className="empty">There are no products yet.</p>
+          <p className="empty">There are no products.</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div>
+    <div className="container--outlet">
       <h2>Manage Products</h2>
       <div className="container">
-        <button className="btn btn--outlined">Add new product</button>
+        <Link to="add-product" className="btn btn--outlined">
+          Add new product
+        </Link>
         <FormRow
           type="text"
           name="search"

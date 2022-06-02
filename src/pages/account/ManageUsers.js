@@ -17,7 +17,7 @@ const ManageProducts = () => {
 
   if (users.length === 0) {
     return (
-      <div>
+      <div className="container--outlet">
         <h2>Manage Users</h2>
         <div className="container">
           <p className="empty">Something went wrong!</p>
@@ -28,7 +28,7 @@ const ManageProducts = () => {
   }
 
   return (
-    <div>
+    <div className="container--outlet">
       <h2>Manage Users</h2>
       <ManageItems items={users} type="users" />
     </div>

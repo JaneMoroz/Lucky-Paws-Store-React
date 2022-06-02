@@ -37,7 +37,7 @@ function App() {
           <Route path="manage-reviews" element={<ManageReviews />} />
           <Route path="manage-orders" element={<ManageOrders />} />
           <Route path="manage-orders/:id" element={<MyOrder />} />
-          <Route path="add-product" element={<AddProduct />} />
+          <Route path="manage-products/add-product" element={<AddProduct />} />
         </Route>
         <Route path="about" element={<About />} />
         <Route path="*" element={<Error />} />

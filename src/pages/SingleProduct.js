@@ -108,14 +108,16 @@ const SingleProduct = () => {
                 </div>
               )}
             </div>
-            <div className="features">
-              <h3>Features:</h3>
-              <ul className="features-list">
-                {features.map((feature, index) => {
-                  return <li key={index}>{feature}</li>;
-                })}
-              </ul>
-            </div>
+            {features.length !== 0 && (
+              <div className="features">
+                <h3>Features:</h3>
+                <ul className="features-list">
+                  {features.map((feature, index) => {
+                    return <li key={index}>{feature}</li>;
+                  })}
+                </ul>
+              </div>
+            )}
             <div className="main-footer">
               <div className="quantity">
                 <button className="btn">

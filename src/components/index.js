@@ -1,6 +1,7 @@
 import Navbar from "./Navbar";
 import Auth from "./Auth";
 import FormRow from "./FormRow";
+import FormRowSelect from "./FormRowSelect";
 import PageHero from "./PageHero";
 import UserNavigation from "./UserNavigation";
 import OrderItem from "./OrderItem";
@@ -14,6 +15,7 @@ export {
   Navbar,
   Auth,
   FormRow,
+  FormRowSelect,
   PageHero,
   UserNavigation,
   OrderItem,

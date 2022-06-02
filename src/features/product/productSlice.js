@@ -34,6 +34,19 @@ export const getProductById = createAsyncThunk(
   }
 );
 
+export const addNewProduct = createAsyncThunk(
+  "user/addNewProduct",
+  async (product, thunkAPI) => {
+    try {
+      const res = await customFetch.post("/products", product);
+      const productData = res.data.data.data;
+      return { productData };
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
 const productSlice = createSlice({
   name: "product",
   initialState,
@@ -57,6 +70,17 @@ const productSlice = createSlice({
       state.isLoading = false;
     },
     [getProductById.rejected]: (state, { payload }) => {
+      state.isLoading = false;
+      toast.error(payload);
+    },
+    [addNewProduct.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [addNewProduct.fulfilled]: (state, { payload }) => {
+      toast.success(`${payload.productData.name} is added`);
+      state.isLoading = false;
+    },
+    [addNewProduct.rejected]: (state, { payload }) => {
       state.isLoading = false;
       toast.error(payload);
     },
