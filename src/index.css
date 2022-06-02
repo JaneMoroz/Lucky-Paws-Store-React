@@ -285,6 +285,11 @@ ul {
   text-transform: capitalize;
 }
 
+.container--max {
+  max-width: 114rem;
+  margin: 0 auto;
+}
+
 .container {
   height: 100%;
   display: flex;

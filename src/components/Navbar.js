@@ -9,7 +9,7 @@ import Wrapper from "../assets/wrappers/Navbar";
 
 const Navbar = () => {
   return (
-    <Wrapper>
+    <Wrapper className="container--max">
       <div>
         <Link className="btn logo" to="/">
           Lucky Paws

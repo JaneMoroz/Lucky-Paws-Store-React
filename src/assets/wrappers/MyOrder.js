@@ -2,11 +2,17 @@ import styled from "styled-components";
 
 const Wrapper = styled.div`
   padding: 2.4rem 3.2rem;
-  min-width: 50rem;
   display: flex;
   flex-direction: column;
   row-gap: 2rem;
   align-items: center;
+
+  .order-id {
+    @media only screen and (max-width: 37.5em) {
+      font-size: 2rem;
+      font-weight: 500;
+    }
+  }
 
   .date {
     margin-bottom: 1.4rem;
@@ -48,6 +54,7 @@ const Wrapper = styled.div`
     padding: 2rem;
     align-items: center;
     justify-items: center;
+    column-gap: 1rem;
   }
 
   .order-user,

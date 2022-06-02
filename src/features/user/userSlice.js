@@ -57,6 +57,7 @@ export const updateUser = createAsyncThunk(
     try {
       const res = await customFetch.patch("/users/updateMe", user);
       const userData = res.data.data;
+      console.log(userData);
       return { userData };
     } catch (error) {
       if (error.response.status === 401) {

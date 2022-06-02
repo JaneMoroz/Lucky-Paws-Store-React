@@ -9,15 +9,15 @@ const SharedLayout = () => {
 
   if (!user) {
     return (
-      <>
+      <div className="container--max">
         <PageHero page={"account"} />
         <Auth />
-      </>
+      </div>
     );
   }
 
   return (
-    <Wrapper>
+    <Wrapper className="container--max">
       <PageHero page={"account"} />
       <UserNavigation />
       <Outlet />

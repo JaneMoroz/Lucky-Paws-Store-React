@@ -4,6 +4,7 @@ import FormRow from "../../components/FormRow";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { updateUser, updateUserPassword } from "../../features/user/userSlice";
+import defaultImage from "../../assets/images/default.jpg";
 
 const Settings = () => {
   const { isLoading, user } = useSelector((store) => store.user);
@@ -101,6 +102,10 @@ const Settings = () => {
                 className="form-photo"
                 src={userData.photoUrl}
                 alt={userData.name}
+                onError={({ currentTarget }) => {
+                  currentTarget.onerror = null; // prevents looping
+                  currentTarget.src = defaultImage;
+                }}
               />
               <input
                 className="form-upload"

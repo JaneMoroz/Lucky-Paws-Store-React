@@ -45,7 +45,9 @@ const MyOrder = () => {
 
   return (
     <Wrapper>
-      <h2>Order # {id}</h2>
+      <h2>
+        Order # <span className="order-id">{id}</span>
+      </h2>
       <div className="order-container">
         <p className="date">{date}</p>
         <div className="products">

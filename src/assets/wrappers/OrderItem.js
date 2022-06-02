@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 const Wrapper = styled.div`
   border-bottom: 1px solid var(--color-grey);
+  width: 100%;
   h3 {
     display: inline-block;
     position: relative;
@@ -37,12 +38,20 @@ const Wrapper = styled.div`
     align-items: center;
     font-size: 1.6rem;
     padding: 0.6rem 2rem;
+
+    @media only screen and (max-width: 37.5em) {
+      grid-template-columns: 1fr 5rem 6rem;
+    }
   }
 
   .title {
     display: inline-block;
     white-space: nowrap;
     text-transform: capitalize;
+
+    @media only screen and (max-width: 37.5em) {
+      white-space: pre-wrap;
+    }
   }
 
   .quantity {
@@ -63,6 +72,10 @@ const Wrapper = styled.div`
     padding: 1rem 2rem;
     margin-top: 1.6rem;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+
+    @media only screen and (max-width: 37.5em) {
+      grid-template-columns: 1fr 5rem 6rem;
+    }
   }
 
   .status p {
