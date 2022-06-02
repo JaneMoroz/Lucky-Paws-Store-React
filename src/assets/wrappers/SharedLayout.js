@@ -6,12 +6,15 @@ const Wrapper = styled.div`
   padding: 0 5.6rem;
   justify-items: center;
 
+  @media only screen and (max-width: 56.25em) {
+    padding: 0 2.4rem;
+  }
+
   @media only screen and (max-width: 37.5em) {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 0 2.4rem;
   }
 `;
 

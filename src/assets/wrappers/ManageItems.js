@@ -5,7 +5,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 1.8rem;
-  min-width: 45rem;
+  width: 100%;
 
   .item {
     display: grid;
@@ -14,6 +14,10 @@ const Wrapper = styled.div`
     align-items: center;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     padding-right: 1.2rem;
+
+    @media only screen and (max-width: 56.25em) {
+      grid-template-columns: 8rem 1fr 5rem;
+    }
   }
 
   img {
@@ -37,6 +41,11 @@ const Wrapper = styled.div`
     display: flex;
     column-gap: 2.4rem;
     justify-self: center;
+
+    @media only screen and (max-width: 56.25em) {
+      flex-direction: column;
+      row-gap: 0.6rem;
+    }
   }
 
   .icon {
