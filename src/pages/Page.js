@@ -16,7 +16,7 @@ const Page = () => {
   }, []);
 
   return (
-    <Wrapper>
+    <Wrapper className="container--max">
       {page === "/dog" && (
         <>
           <div className="page-container">

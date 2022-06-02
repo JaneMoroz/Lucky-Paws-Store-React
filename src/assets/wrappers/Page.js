@@ -6,9 +6,17 @@ const Wrapper = styled.div`
   position: relative;
 
   .page-container {
+    opacity: 100%;
     display: grid;
     grid-template-columns: min-content 1fr;
     justify-items: center;
+    animation-fill-mode: forwards;
+    animation: becomeVisible 1.5s ease-in-out;
+
+    @media only screen and (max-width: 56.25em) {
+      display: flex;
+      flex-direction: column;
+    }
   }
 
   .background {
@@ -55,6 +63,26 @@ const Wrapper = styled.div`
     to {
       height: 100%;
       width: 100%;
+    }
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 100%;
+    }
+  }
+
+  @keyframes becomeVisible {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 0;
     }
   }
 `;

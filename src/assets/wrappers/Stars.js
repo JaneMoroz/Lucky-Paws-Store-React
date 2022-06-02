@@ -1,6 +1,9 @@
 import styled from "styled-components";
 
 const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
   p {
     text-align: end;
     padding: 0.6rem 0;

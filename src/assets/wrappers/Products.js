@@ -7,14 +7,23 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     row-gap: 1.8rem;
+    padding: 0 2.4rem 0 0;
+
+    @media only screen and (max-width: 37.5em) {
+      padding: 0;
+    }
   }
 
   .product {
     display: grid;
     grid-template-columns: 16rem 1fr min-content;
     background-color: #fff;
-    min-width: 55rem;
+    width: 100%;
     border: 1px solid #fff;
+
+    @media only screen and (max-width: 37.5em) {
+      grid-template-columns: 16rem 1fr;
+    }
   }
 
   .image-container {
@@ -22,7 +31,7 @@ const Wrapper = styled.div`
     height: 14rem;
   }
 
-  .search {
+  .btn--details {
     display: none;
     position: absolute;
     top: 0;
@@ -52,6 +61,13 @@ const Wrapper = styled.div`
     justify-content: space-between;
   }
 
+  .btns {
+    @media only screen and (max-width: 37.5em) {
+      grid-row: 2;
+      grid-column: 1/-1;
+    }
+  }
+
   .category {
     font-weight: 300;
     text-transform: capitalize;
@@ -70,30 +86,49 @@ const Wrapper = styled.div`
     align-items: center;
     justify-content: center;
     padding: 0 2.4rem;
+
+    @media only screen and (max-width: 75em) {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    @media only screen and (max-width: 56.25em) {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    @media only screen and (max-width: 37.5em) {
+      grid-template-columns: 1fr 1fr;
+    }
   }
 
-  .grid .product {
-    display: flex;
-    flex-direction: column;
-    min-width: 20rem;
-    height: 30rem;
-  }
+  .grid {
+    .product {
+      display: flex;
+      flex-direction: column;
+      min-width: 20rem;
+      min-height: 30rem;
+      row-gap: 0;
+      height: 100%;
+    }
 
-  .grid .details {
-    height: 100%;
-  }
+    .details {
+      height: 100%;
+      justify-content: space-between;
+    }
 
-  .grid .image-container {
-    height: 20rem;
-  }
+    .image-container {
+      height: 20rem;
+    }
 
-  .grid .image-container:hover .search {
-    display: block;
-  }
+    .image-container:hover .btn--details {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-  .grid .category,
-  .grid .btns {
-    display: none;
+    .category,
+    .btns {
+      display: none;
+    }
   }
 `;
 

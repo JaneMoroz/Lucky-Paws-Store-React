@@ -4,6 +4,11 @@ const Wrapper = styled.div`
   padding: 3.2rem;
   color: #fff;
 
+  @media only screen and (max-width: 56.25em) {
+    padding: 0;
+    margin-bottom: 2.4rem;
+  }
+
   .filters-container {
     padding: 2.4rem;
     border: 1px solid #fff;
@@ -12,12 +17,28 @@ const Wrapper = styled.div`
     flex-direction: column;
     row-gap: 1.6rem;
     align-items: center;
+
+    @media only screen and (max-width: 56.25em) {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: 4.8rem;
+    }
+
+    @media only screen and (max-width: 37.5em) {
+      display: flex;
+    }
+  }
+
+  .total {
+    text-align: center;
+    padding-bottom: 1.4rem;
   }
 
   .display-filter {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
+    padding-bottom: 1.4rem;
   }
 
   .icon {
@@ -36,6 +57,9 @@ const Wrapper = styled.div`
   }
 
   .form {
+    @media only screen and (max-width: 56.25em) {
+      padding: 0;
+    }
   }
 
   .form-control {
@@ -52,6 +76,7 @@ const Wrapper = styled.div`
     padding: 1rem 1.6rem;
     color: #fff;
     border-radius: 0;
+    min-width: 25rem;
   }
 
   .form-input::placeholder {
@@ -69,6 +94,7 @@ const Wrapper = styled.div`
     text-transform: uppercase;
     margin-bottom: 1.2rem;
     text-align: center;
+    color: #fff;
   }
 
   .search {
@@ -98,6 +124,8 @@ const Wrapper = styled.div`
     text-transform: uppercase;
     color: inherit;
     text-decoration: underline;
+    grid-row: 2;
+    grid-column: 1/-1;
   }
 `;
 

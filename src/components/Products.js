@@ -7,13 +7,16 @@ import { Link } from "react-router-dom";
 const Products = ({ products }) => {
   return (
     <Wrapper>
-      <div className="products-container">
+      <div className="products-container grid">
         {products.map((product, index) => {
           return (
             <div key={index} className="product">
               <div className="image-container">
                 <img src={product.primaryImage} alt={product.name} />
-                <Link to={`/products/${product._id}`} className="btn search">
+                <Link
+                  to={`/products/${product._id}`}
+                  className="btn btn--details"
+                >
                   <BsSearch />
                 </Link>
               </div>

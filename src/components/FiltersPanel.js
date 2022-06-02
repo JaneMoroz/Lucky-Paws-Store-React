@@ -6,38 +6,46 @@ const FiltersPanel = () => {
   return (
     <Wrapper>
       <div className="filters-container">
-        <span className="total">11 products found</span>
-        <div className="display-filter">
-          <button className="btn icon">
-            <BsGrid3X2GapFill />
-          </button>
-          <button className="btn icon">
-            <BsList />
-          </button>
-        </div>
-        {/* sort */}
-        <form className="form">
-          <label htmlFor="sort" className="form-label">
-            sort by
-          </label>
-          <select name="sort" id="sort" className="form-input">
-            <option value="price-lowest">price (lowest)</option>
-            <option value="price-highest">price (highest)</option>
-            <option value="name-a">name (a-z)</option>
-            <option value="name-z">name (z-a)</option>
-          </select>
-        </form>
-        <form className="form" onSubmit={(e) => e.preventDefault()}>
-          {/* search */}
-          <div className="form-control search">
-            <input
-              type="text"
-              name="text"
-              placeholder="search"
-              className="form-input"
-            />
+        <div>
+          {/* total found */}
+          <p className="total">11 products found</p>
+          <div className="display-filter">
+            <button className="btn icon">
+              <BsGrid3X2GapFill />
+            </button>
+            <button className="btn icon">
+              <BsList />
+            </button>
           </div>
-          {/* category/type */}
+          {/* sort */}
+          <form className="form">
+            <label htmlFor="sort" className="form-label">
+              sort by
+            </label>
+            <select name="sort" id="sort" className="form-input">
+              <option value="price-lowest">price (lowest)</option>
+              <option value="price-highest">price (highest)</option>
+              <option value="name-a">name (a-z)</option>
+              <option value="name-z">name (z-a)</option>
+            </select>
+          </form>
+          <form className="form" onSubmit={(e) => e.preventDefault()}>
+            {/* search */}
+            <div className="form-control search">
+              <label htmlFor="search" className="form-label">
+                search
+              </label>
+              <input
+                type="text"
+                name="search"
+                id="search"
+                placeholder="search"
+                className="form-input"
+              />
+            </div>
+          </form>
+        </div>
+        <form className="form">
           <div className="form-control">
             <p className="form-label">category</p>
             <div className="btns-container">
