@@ -50,8 +50,8 @@ const SingleProduct = () => {
   } = product;
 
   return (
-    <Wrapper>
-      <PageHero page={name} />
+    <Wrapper className="container--max">
+      <PageHero page="for cats" />
       <div className="product-container">
         <div className="images">
           <img className="main-image" src={main} alt={name} />

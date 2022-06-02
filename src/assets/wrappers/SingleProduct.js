@@ -6,17 +6,29 @@ const Wrapper = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr;
     column-gap: 3.2rem;
+
+    @media only screen and (max-width: 56.25em) {
+      grid-template-columns: 1fr;
+      justify-items: center;
+      row-gap: 2.4rem;
+    }
   }
 
   .text {
     display: flex;
     flex-direction: column;
     row-gap: 1.6rem;
+    @media only screen and (max-width: 56.25em) {
+      max-width: 80rem;
+    }
   }
 
   .images {
     display: flex;
     flex-direction: column;
+    @media only screen and (max-width: 56.25em) {
+      max-width: 70rem;
+    }
   }
 
   .main-image {
@@ -31,8 +43,18 @@ const Wrapper = styled.div`
     grid-template-columns: repeat(5, 1fr);
     column-gap: 1rem;
     img {
-      height: 100px;
+      height: 10rem;
       cursor: pointer;
+
+      @media only screen and (max-width: 75em) {
+        height: 7rem;
+      }
+
+      @media only screen and (max-width: 56.25em) {
+        height: 10rem;
+        width: 100%;
+        object-fit: cover;
+      }
     }
   }
 
@@ -54,6 +76,14 @@ const Wrapper = styled.div`
     h3 {
       text-transform: uppercase;
     }
+
+    @media only screen and (max-width: 56.25em) {
+      padding: 0 4.8rem;
+    }
+
+    @media only screen and (max-width: 37.5em) {
+      padding: 0;
+    }
   }
 
   .option {
@@ -61,6 +91,19 @@ const Wrapper = styled.div`
     column-gap: 1.6rem;
     align-items: center;
     padding: 1.2rem 0;
+
+    @media only screen and (max-width: 37.5em) {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      row-gap: 1.4rem;
+    }
+
+    h3 {
+      @media only screen and (max-width: 37.5em) {
+        grid-row: 1 /-1;
+      }
+    }
   }
 
   .features-list {
