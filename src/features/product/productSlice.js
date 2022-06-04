@@ -2,10 +2,22 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import customFetch from "../../utils/axios";
 import { toast } from "react-toastify";
 
+const initialFiltersState = {
+  animal: null,
+  grid_view: false,
+  search: null,
+  sort: "-price",
+  sortOptions: ["-price", "+price", "+name", "-name"],
+  type: "all",
+  brand: "all",
+};
+
 const initialState = {
   isLoading: false,
   products: [],
+  filteredProducts: [],
   product: null,
+  ...initialFiltersState,
 };
 
 export const getAllProducts = createAsyncThunk(
@@ -13,6 +25,24 @@ export const getAllProducts = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const res = await customFetch.get("/products");
+      const productsData = res.data.data.data;
+      return { productsData };
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
+export const getProducts = createAsyncThunk(
+  "user/getProducts",
+  async (_, thunkAPI) => {
+    const { animal, sort, type, brand } = thunkAPI.getState().product;
+    const url = `/products?sort=${sort}${animal ? `&animal=${animal}` : ""}${
+      type !== "all" ? `&type=${type}` : ""
+    }${brand !== "all" ? `&brand=${brand}` : ""}`;
+    console.log(url);
+    try {
+      const res = await customFetch.get(url);
       const productsData = res.data.data.data;
       return { productsData };
     } catch (error) {
@@ -50,6 +80,27 @@ export const addNewProduct = createAsyncThunk(
 const productSlice = createSlice({
   name: "product",
   initialState,
+  reducers: {
+    setGrid: (state) => {
+      state.grid_view = true;
+    },
+    setList: (state) => {
+      state.grid_view = false;
+    },
+    updateFilter: (state, { payload: { name, value } }) => {
+      state[name] = value;
+    },
+    clearFilters: (state) => {
+      return {
+        ...state,
+        search: null,
+        sort: "-price",
+        sortOptions: ["-price", "+price", "+name", "-name"],
+        type: "all",
+        brand: "all",
+      };
+    },
+  },
   extraReducers: {
     [getAllProducts.pending]: (state) => {
       state.isLoading = true;
@@ -84,7 +135,21 @@ const productSlice = createSlice({
       state.isLoading = false;
       toast.error(payload);
     },
+    [getProducts.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [getProducts.fulfilled]: (state, { payload }) => {
+      state.filteredProducts = payload.productsData;
+      state.isLoading = false;
+    },
+    [getProducts.rejected]: (state, { payload }) => {
+      state.isLoading = false;
+      toast.error(payload);
+    },
   },
 });
+
+export const { setGrid, setList, updateFilter, clearFilters } =
+  productSlice.actions;
 
 export default productSlice.reducer;

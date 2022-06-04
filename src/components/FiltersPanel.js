@@ -1,32 +1,108 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Wrapper from "../assets/wrappers/FiltersPanel";
 import { BsGrid3X2GapFill, BsList } from "react-icons/bs";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setGrid,
+  setList,
+  updateFilter,
+  clearFilters,
+} from "../features/product/productSlice";
+import { Loader } from "../components";
 
 const FiltersPanel = () => {
+  const dispatch = useDispatch();
+  const {
+    grid_view,
+    isLoading,
+    animal,
+    search,
+    sort,
+    sortOptions,
+    type,
+    brand,
+    products,
+    filteredProducts,
+  } = useSelector((store) => store.product);
+
+  const [categories, setCategories] = useState([]);
+  const [brands, setBrands] = useState([]);
+
+  const handleFilter = (e) => {
+    if (isLoading) return;
+    let name = e.target.name;
+    let value = e.target.value;
+    if (name === "type") {
+      value = e.target.textContent;
+    }
+    dispatch(updateFilter({ name, value }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(clearFilters());
+  };
+
+  useEffect(() => {
+    // get categories/types
+    let tempCategories = [];
+    tempCategories = products
+      .map((product) => {
+        if (product.animal.includes(animal)) {
+          return product.type;
+        }
+      })
+      .filter((product) => product !== undefined);
+    setCategories(["all", ...new Set(tempCategories)]);
+
+    // get brands
+    let tempBrands = [];
+    tempBrands = products
+      .map((product) => {
+        if (product.animal.includes(animal)) {
+          return product.brand;
+        }
+      })
+      .filter((product) => product !== undefined);
+    setBrands(["all", ...new Set(tempBrands)]);
+  }, [products]);
+
   return (
     <Wrapper>
       <div className="filters-container">
         <div>
           {/* total found */}
-          <p className="total">11 products found</p>
+          <p className="total">{filteredProducts.length} products found</p>
           <div className="display-filter">
-            <button className="btn icon">
+            <button
+              onClick={() => dispatch(setGrid())}
+              className={`btn icon ${grid_view ? "active" : ""}`}
+            >
               <BsGrid3X2GapFill />
             </button>
-            <button className="btn icon">
+            <button
+              onClick={() => dispatch(setList())}
+              className={`btn icon ${grid_view ? "" : "active"}`}
+            >
               <BsList />
             </button>
           </div>
           {/* sort */}
-          <form className="form">
+          <form className="form" onSubmit={(e) => e.preventDefault()}>
             <label htmlFor="sort" className="form-label">
               sort by
             </label>
-            <select name="sort" id="sort" className="form-input">
-              <option value="price-lowest">price (lowest)</option>
-              <option value="price-highest">price (highest)</option>
-              <option value="name-a">name (a-z)</option>
-              <option value="name-z">name (z-a)</option>
+            <select
+              name="sort"
+              id="sort"
+              className="form-input"
+              onChange={handleFilter}
+              value={sort}
+            >
+              <option value="+price">price (lowest)</option>
+              <option value="-price">price (highest)</option>
+              <option value="+name">name (a-z)</option>
+              <option value="-name">name (z-a)</option>
             </select>
           </form>
           <form className="form" onSubmit={(e) => e.preventDefault()}>
@@ -45,35 +121,48 @@ const FiltersPanel = () => {
             </div>
           </form>
         </div>
-        <form className="form">
+        <form className="form" onSubmit={(e) => e.preventDefault()}>
           <div className="form-control">
             <p className="form-label">category</p>
             <div className="btns-container">
-              <button name="category" type="button" className="btn category">
-                toys
-              </button>
-              <button name="category" type="button" className="btn category">
-                feeders
-              </button>
-              <button name="category" type="button" className="btn category">
-                clothes
-              </button>
+              {categories.map((category, index) => {
+                return (
+                  <button
+                    key={index}
+                    onClick={handleFilter}
+                    name="type"
+                    type="button"
+                    className="btn category"
+                  >
+                    {category}
+                  </button>
+                );
+              })}
             </div>
           </div>
           {/* brand */}
           <div className="form-control">
-            <label htmlFor="sort" className="form-label">
+            <label htmlFor="brand" className="form-label">
               Brand
             </label>
-            <select name="sort" id="sort" className="form-input">
-              <option value="luckyPaws">lucky paws</option>
-              <option value="coco">coco</option>
-              <option value="chanel">chanel</option>
-              <option value="paw paw">paw paw</option>
+            <select
+              name="brand"
+              id="brand"
+              className="form-input"
+              onChange={handleFilter}
+              value={brand}
+            >
+              {brands.map((brand, index) => {
+                return (
+                  <option key={index} value={brand}>
+                    {brand}
+                  </option>
+                );
+              })}
             </select>
           </div>
         </form>
-        <button type="button" className="btn clear">
+        <button type="button" className="btn clear" onClick={handleSubmit}>
           clear filters
         </button>
       </div>

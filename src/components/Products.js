@@ -1,13 +1,26 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Wrapper from "../assets/wrappers/Products";
 import Stars from "../components/Stars";
 import { BsSearch } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
 const Products = ({ products }) => {
+  const { grid_view } = useSelector((store) => store.product);
+
+  if (products.length === 0) {
+    return (
+      <Wrapper>
+        <div className="container">
+          <p className="empty">No products found.</p>
+        </div>
+      </Wrapper>
+    );
+  }
+
   return (
     <Wrapper>
-      <div className="products-container grid">
+      <div className={`products-container ${grid_view ? "grid" : ""}`}>
         {products.map((product, index) => {
           return (
             <div key={index} className="product">

@@ -1,6 +1,7 @@
 import React from "react";
 
-const Loader = () => {
+const Loader = ({ color }) => {
+  if (color) return <div className="loader white"></div>;
   return <div className="loader"></div>;
 };
 

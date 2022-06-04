@@ -51,7 +51,8 @@ const Wrapper = styled.div`
     transition: all 0.3s;
   }
 
-  .icon:hover {
+  .icon:hover,
+  .active {
     background-color: #fff;
     color: var(--color-1);
   }
@@ -106,7 +107,7 @@ const Wrapper = styled.div`
     text-transform: lowercase;
     font-size: 1.8rem;
     text-align: start;
-    padding: 1rem;
+    padding: 0.6rem;
     transition: all 0.3s;
   }
 

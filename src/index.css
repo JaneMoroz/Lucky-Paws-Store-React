@@ -211,6 +211,9 @@ ul {
   -webkit-animation-delay: -0.16s;
   animation-delay: -0.16s;
 }
+.white.loader {
+  color: #fff;
+}
 .loader:before,
 .loader:after {
   position: absolute;

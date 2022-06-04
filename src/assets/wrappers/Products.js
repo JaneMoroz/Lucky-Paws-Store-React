@@ -1,6 +1,13 @@
 import styled from "styled-components";
 
 const Wrapper = styled.div`
+  .container {
+    background-color: #fff;
+  }
+
+  .empty {
+    box-shadow: none;
+  }
   /* for cats */
   /* list */
   .products-container {
