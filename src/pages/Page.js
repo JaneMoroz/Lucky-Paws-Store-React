@@ -6,6 +6,7 @@ import {
   getAllProducts,
   getProducts,
   updateFilter,
+  clearFilters,
 } from "../features/product/productSlice";
 
 const Page = () => {
@@ -25,6 +26,7 @@ const Page = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(clearFilters());
     dispatch(getAllProducts());
     if (page === "/dog") {
       dispatch(updateFilter({ name: "animal", value: "dog" }));
@@ -57,8 +59,34 @@ const Page = () => {
           <div className="background background--1"></div>
         </>
       )}
-      {page === "/cat" && <div className="background background--2"></div>}
-      {page === "/all" && <div className="background background--3"></div>}
+      {/* for cat PAGE */}
+      {page === "/cat" && (
+        <>
+          <div className="page-container">
+            <FiltersPanel />
+            <div>
+              <PageHero page={"for cats"} type={"page"} />
+              {isLoading && <Loader color="white" />}
+              {!isLoading && <Products products={filteredProducts} />}
+            </div>
+          </div>
+          <div className="background background--2"></div>
+        </>
+      )}
+      {/* ALL products PAGE */}
+      {page === "/all" && (
+        <>
+          <div className="page-container">
+            <FiltersPanel />
+            <div>
+              <PageHero page={"for all"} type={"page"} />
+              {isLoading && <Loader color="white" />}
+              {!isLoading && <Products products={filteredProducts} />}
+            </div>
+          </div>
+          <div className="background background--3"></div>
+        </>
+      )}
       {page === "/about" && <div className="background background--4"></div>}
     </Wrapper>
   );

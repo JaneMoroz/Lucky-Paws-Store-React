@@ -48,7 +48,11 @@ const FiltersPanel = () => {
     let tempCategories = [];
     tempCategories = products
       .map((product) => {
-        if (product.animal.includes(animal)) {
+        if (animal !== null) {
+          if (product.animal.includes(animal)) {
+            return product.type;
+          }
+        } else {
           return product.type;
         }
       })
@@ -59,7 +63,11 @@ const FiltersPanel = () => {
     let tempBrands = [];
     tempBrands = products
       .map((product) => {
-        if (product.animal.includes(animal)) {
+        if (animal !== null) {
+          if (product.animal.includes(animal)) {
+            return product.brand;
+          }
+        } else {
           return product.brand;
         }
       })
