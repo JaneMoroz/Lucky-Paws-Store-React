@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
 const Wrapper = styled.div`
+  h2 {
+    text-transform: capitalize;
+  }
+
   .product-container {
     padding: 2.4rem;
     display: grid;
@@ -12,6 +16,11 @@ const Wrapper = styled.div`
       justify-items: center;
       row-gap: 2.4rem;
     }
+  }
+
+  .btn-container {
+    display: flex;
+    column-gap: 1.4rem;
   }
 
   .text {
@@ -44,6 +53,8 @@ const Wrapper = styled.div`
     column-gap: 1rem;
     img {
       height: 10rem;
+      width: 100%;
+      object-fit: cover;
       cursor: pointer;
 
       @media only screen and (max-width: 75em) {
@@ -52,7 +63,6 @@ const Wrapper = styled.div`
 
       @media only screen and (max-width: 56.25em) {
         height: 10rem;
-        width: 100%;
         object-fit: cover;
       }
     }
@@ -102,6 +112,7 @@ const Wrapper = styled.div`
     h3 {
       @media only screen and (max-width: 37.5em) {
         grid-row: 1 /-1;
+        align-self: flex-start;
       }
     }
   }

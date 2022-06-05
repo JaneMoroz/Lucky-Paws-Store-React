@@ -171,7 +171,9 @@ ul {
 }
 
 .btn--solid {
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 1.6rem;
   font-weight: 300;
   padding: 1.2rem 1.8rem;

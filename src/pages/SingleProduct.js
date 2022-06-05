@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Wrapper from "../assets/wrappers/SingleProduct";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductById } from "../features/product/productSlice";
 import { Loader, PageHero, Stars } from "../components";
 import { HiMinus, HiPlus } from "react-icons/hi";
+import { updateFilter } from "../features/product/productSlice";
 
 const SingleProduct = () => {
   const dispatch = useDispatch();
@@ -31,9 +32,15 @@ const SingleProduct = () => {
     return;
   }
 
-  console.log(product);
+  const handleClick = (btn) => {
+    if (btn === "type") {
+      dispatch(updateFilter({ name: "type", value: product.type }));
+    } else {
+      dispatch(updateFilter({ name: "brand", value: product.brand }));
+    }
+  };
+
   const {
-    animal,
     brand,
     color: colors,
     features,
@@ -45,7 +52,6 @@ const SingleProduct = () => {
     ratingsAverage,
     ratingsQuantity,
     style: styles,
-    subType,
     type,
   } = product;
 
@@ -77,7 +83,23 @@ const SingleProduct = () => {
         </div>
         <div className="text">
           <div className="header">
-            <button className="btn btn--solid">{type}</button>
+            <div className="btn-container">
+              <Link
+                to="/all"
+                onClick={() => handleClick("type")}
+                className="btn btn--solid"
+              >
+                {type}
+              </Link>
+              <Link
+                to="/all"
+                onClick={() => handleClick("brand")}
+                className="btn btn--solid"
+              >
+                {brand}
+              </Link>
+            </div>
+
             <Stars stars={ratingsAverage} reviews={ratingsQuantity} />
           </div>
           <div className="main">
@@ -131,7 +153,12 @@ const SingleProduct = () => {
               <p className="price">${price}</p>
             </div>
           </div>
-          <button className="btn btn--outlined">add to cart</button>
+          <button className="btn btn--outlined" disabled={!isActive}>
+            add to cart
+          </button>
+          <Link to="/all" className="btn btn--outlined">
+            back to store
+          </Link>
         </div>
       </div>
     </Wrapper>

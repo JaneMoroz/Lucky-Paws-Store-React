@@ -12,27 +12,20 @@ import {
 const Page = () => {
   const page = window.location.pathname;
 
-  const {
-    isLoading,
-    animal,
-    search,
-    sort,
-    type,
-    brand,
-    products,
-    filteredProducts,
-  } = useSelector((store) => store.product);
+  const { isLoading, animal, sort, type, brand, filteredProducts } =
+    useSelector((store) => store.product);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(clearFilters());
     dispatch(getAllProducts());
     if (page === "/dog") {
+      dispatch(clearFilters());
       dispatch(updateFilter({ name: "animal", value: "dog" }));
       return;
     }
     if (page === "/cat") {
+      dispatch(clearFilters());
       dispatch(updateFilter({ name: "animal", value: "cat" }));
       return;
     }
