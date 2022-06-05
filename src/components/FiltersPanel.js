@@ -1,24 +1,26 @@
 import React, { useEffect, useState } from "react";
 import Wrapper from "../assets/wrappers/FiltersPanel";
 import { BsGrid3X2GapFill, BsList } from "react-icons/bs";
+import { MdClose } from "react-icons/md";
+import { HiOutlineFilter } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setGrid,
   setList,
   updateFilter,
   clearFilters,
+  openFiltersPanel,
+  closeFiltersPanel,
 } from "../features/product/productSlice";
-import { Loader } from "../components";
 
 const FiltersPanel = () => {
   const dispatch = useDispatch();
   const {
     grid_view,
     isLoading,
+    isFiltersPanelOpen,
     animal,
-    search,
     sort,
-    sortOptions,
     type,
     brand,
     products,
@@ -77,10 +79,29 @@ const FiltersPanel = () => {
 
   return (
     <Wrapper>
-      <div className="filters-container">
-        <div>
+      <div className={`filters-hidden ${isFiltersPanelOpen ? "hidden" : ""}`}>
+        <button
+          className="btn close"
+          onClick={() => dispatch(openFiltersPanel())}
+        >
+          <HiOutlineFilter />
+        </button>
+      </div>
+      <form
+        className={`filters-container ${isFiltersPanelOpen ? "" : "hidden"}`}
+        onSubmit={(e) => e.preventDefault()}
+      >
+        <button
+          className="btn close"
+          onClick={() => dispatch(closeFiltersPanel())}
+        >
+          <MdClose />
+        </button>
+
+        <div className="form-control">
           {/* total found */}
           <p className="total">{filteredProducts.length} products found</p>
+          {/* display options */}
           <div className="display-filter">
             <button
               onClick={() => dispatch(setGrid())}
@@ -96,7 +117,7 @@ const FiltersPanel = () => {
             </button>
           </div>
           {/* sort */}
-          <form className="form" onSubmit={(e) => e.preventDefault()}>
+          <div className="form-control">
             <label htmlFor="sort" className="form-label">
               sort by
             </label>
@@ -112,68 +133,54 @@ const FiltersPanel = () => {
               <option value="+name">name (a-z)</option>
               <option value="-name">name (z-a)</option>
             </select>
-          </form>
-          <form className="form" onSubmit={(e) => e.preventDefault()}>
-            {/* search */}
-            <div className="form-control search">
-              <label htmlFor="search" className="form-label">
-                search
-              </label>
-              <input
-                type="text"
-                name="search"
-                id="search"
-                placeholder="search"
-                className="form-input"
-              />
-            </div>
-          </form>
+          </div>
         </div>
-        <form className="form" onSubmit={(e) => e.preventDefault()}>
-          <div className="form-control">
-            <p className="form-label">category</p>
-            <div className="btns-container">
-              {categories.map((category, index) => {
-                return (
-                  <button
-                    key={index}
-                    onClick={handleFilter}
-                    name="type"
-                    type="button"
-                    className="btn category"
-                  >
-                    {category}
-                  </button>
-                );
-              })}
-            </div>
+        {/* category/type */}
+        <div className="form-control category-container">
+          <p className="form-label">category</p>
+          <div className="btns-container">
+            {categories.map((category, index) => {
+              return (
+                <button
+                  key={index}
+                  onClick={handleFilter}
+                  name="type"
+                  type="button"
+                  className={`btn category ${
+                    category === type ? "active" : ""
+                  }`}
+                >
+                  {category}
+                </button>
+              );
+            })}
           </div>
-          {/* brand */}
-          <div className="form-control">
-            <label htmlFor="brand" className="form-label">
-              Brand
-            </label>
-            <select
-              name="brand"
-              id="brand"
-              className="form-input"
-              onChange={handleFilter}
-              value={brand}
-            >
-              {brands.map((brand, index) => {
-                return (
-                  <option key={index} value={brand}>
-                    {brand}
-                  </option>
-                );
-              })}
-            </select>
-          </div>
-        </form>
+        </div>
+        {/* brand */}
+        <div className="form-control">
+          <label htmlFor="brand" className="form-label">
+            Brand
+          </label>
+          <select
+            name="brand"
+            id="brand"
+            className="form-input"
+            onChange={handleFilter}
+            value={brand}
+          >
+            {brands.map((brand, index) => {
+              return (
+                <option key={index} value={brand}>
+                  {brand}
+                </option>
+              );
+            })}
+          </select>
+        </div>
         <button type="button" className="btn clear" onClick={handleSubmit}>
           clear filters
         </button>
-      </div>
+      </form>
     </Wrapper>
   );
 };

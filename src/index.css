@@ -45,6 +45,7 @@ html {
 
   /* grey */
   --color-grey: #b2b2b2;
+  --color-grey-transparent: rgba(178, 178, 178, 0.8);
 
   /* rest of the colors */
   --color-success: #8ac926;

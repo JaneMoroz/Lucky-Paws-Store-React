@@ -23,7 +23,7 @@ const Wrapper = styled.nav`
 
   .btns-container {
     display: flex;
-    column-gap: 1rem;
+    column-gap: 1.6rem;
     align-items: center;
   }
 

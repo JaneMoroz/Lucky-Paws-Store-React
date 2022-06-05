@@ -9,7 +9,12 @@ const Wrapper = styled.div`
     margin-bottom: 2.4rem;
   }
 
+  .filters-hidden {
+    position: relative;
+    min-height: 7rem;
+  }
   .filters-container {
+    position: relative;
     padding: 2.4rem;
     border: 1px solid #fff;
     white-space: nowrap;
@@ -29,11 +34,17 @@ const Wrapper = styled.div`
     }
   }
 
+  .hidden {
+    display: none;
+  }
+
+  /* total */
   .total {
     text-align: center;
     padding-bottom: 1.4rem;
   }
 
+  /* grid or list display buttons */
   .display-filter {
     display: flex;
     align-items: center;
@@ -51,17 +62,26 @@ const Wrapper = styled.div`
     transition: all 0.3s;
   }
 
-  .icon:hover,
-  .active {
-    background-color: #fff;
-    color: var(--color-1);
-  }
+  /* close button */
+  .close {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(-50%, 20%);
+    padding: 0.5rem;
+    font-size: 3.6rem;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    transition: all 0.3s;
 
-  .form {
     @media only screen and (max-width: 56.25em) {
-      padding: 0;
+      display: flex;
     }
   }
+
+  /* from */
 
   .form-control {
     padding: 1.6rem 0;
@@ -87,7 +107,7 @@ const Wrapper = styled.div`
 
   .form-input:focus {
     outline: #fff;
-    background-color: var(--color-1);
+    background-color: var(--color-grey);
   }
 
   .form-label {
@@ -98,8 +118,15 @@ const Wrapper = styled.div`
     color: #fff;
   }
 
-  .search {
-    border-bottom: 1px solid #fff;
+  /* type/ category buttons */
+  .category-container {
+    grid-row: 1/-1;
+    grid-column: 2;
+  }
+  .btns-container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1.2rem;
   }
 
   .category {
@@ -111,21 +138,21 @@ const Wrapper = styled.div`
     transition: all 0.3s;
   }
 
-  .category:hover {
-    background-color: var(--color-1);
+  /*  all buttons hover */
+  .icon:hover,
+  .active,
+  .category:hover,
+  .close:hover {
+    background-color: #fff;
+    color: var(--color-grey);
   }
 
-  .btns-container {
-    display: flex;
-    flex-direction: column;
-    row-gap: 1.2rem;
-  }
-
+  /* clear filter button */
   .clear {
     text-transform: uppercase;
     color: inherit;
     text-decoration: underline;
-    grid-row: 2;
+    grid-row: 3;
     grid-column: 1/-1;
   }
 `;

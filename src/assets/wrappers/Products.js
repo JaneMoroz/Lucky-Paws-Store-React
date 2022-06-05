@@ -8,16 +8,16 @@ const Wrapper = styled.div`
   .empty {
     box-shadow: none;
   }
-  /* for cats */
+
   /* list */
   .products-container {
     display: flex;
     flex-direction: column;
     row-gap: 1.8rem;
-    padding: 0 2.4rem 0 0;
+    padding: 0 2.4rem 3.2rem 2rem;
 
     @media only screen and (max-width: 37.5em) {
-      padding: 0;
+      padding: 0 0 2.4rem 0;
     }
   }
 
@@ -47,7 +47,7 @@ const Wrapper = styled.div`
     width: 100%;
     font-size: 3.6rem;
     color: #fff;
-    background-color: var(--background-1);
+    background-color: var(--color-grey-transparent);
   }
 
   img {
@@ -92,7 +92,7 @@ const Wrapper = styled.div`
     column-gap: 1.8rem;
     align-items: center;
     justify-content: center;
-    padding: 0 2.4rem;
+    padding: 0 2.4rem 3.2rem 2.4rem;
 
     @media only screen and (max-width: 75em) {
       grid-template-columns: 1fr 1fr;

@@ -5,15 +5,14 @@ import { toast } from "react-toastify";
 const initialFiltersState = {
   animal: null,
   grid_view: false,
-  search: null,
   sort: "-price",
-  sortOptions: ["-price", "+price", "+name", "-name"],
   type: "all",
   brand: "all",
 };
 
 const initialState = {
   isLoading: false,
+  isFiltersPanelOpen: true,
   products: [],
   filteredProducts: [],
   product: null,
@@ -87,13 +86,18 @@ const productSlice = createSlice({
     setList: (state) => {
       state.grid_view = false;
     },
+    openFiltersPanel: (state) => {
+      state.isFiltersPanelOpen = true;
+    },
+    closeFiltersPanel: (state) => {
+      state.isFiltersPanelOpen = false;
+    },
     updateFilter: (state, { payload: { name, value } }) => {
       state[name] = value;
     },
     clearFilters: (state) => {
       return {
         ...state,
-        search: null,
         sort: "-price",
         sortOptions: ["-price", "+price", "+name", "-name"],
         type: "all",
@@ -149,7 +153,13 @@ const productSlice = createSlice({
   },
 });
 
-export const { setGrid, setList, updateFilter, clearFilters } =
-  productSlice.actions;
+export const {
+  setGrid,
+  setList,
+  updateFilter,
+  clearFilters,
+  openFiltersPanel,
+  closeFiltersPanel,
+} = productSlice.actions;
 
 export default productSlice.reducer;
