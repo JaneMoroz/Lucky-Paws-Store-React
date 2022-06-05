@@ -50,6 +50,7 @@ html {
   /* rest of the colors */
   --color-success: #8ac926;
   --color-danger: #ff595e;
+  --image-overlay: rgba(0, 175, 185, 0.3);
 
   /* fonts  */
   --font-logo: 3.2rem;
