@@ -4,7 +4,7 @@ import ManageOrders from "./ManageOrders";
 import ManageReviews from "./ManageReviews";
 import ManageProducts from "./ManageProducts";
 import MyOrders from "./MyOrders";
-import MyOrder from "./MyOrder";
+import Order from "./Order";
 import MyReviews from "./MyReviews";
 import Settings from "./Settings";
 import SharedLayout from "./SharedLayout";
@@ -15,7 +15,7 @@ export {
   ManageUsers,
   ManageReviews,
   MyOrders,
-  MyOrder,
+  Order,
   MyReviews,
   Settings,
   SharedLayout,

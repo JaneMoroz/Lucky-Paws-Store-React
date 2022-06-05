@@ -133,7 +133,9 @@ const MyOrder = () => {
           )}
         </div>
       </div>
-      <button className="btn btn--outlined">Save changes</button>
+      {user.role === "admin" && (
+        <button className="btn btn--outlined">Save changes</button>
+      )}
       <Link
         to={`${
           user.role === "admin"

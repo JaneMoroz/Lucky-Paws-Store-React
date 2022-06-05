@@ -2,6 +2,7 @@ import React from "react";
 import { FaEye, FaPencilAlt, FaRegTrashAlt } from "react-icons/fa";
 import Wrapper from "../assets/wrappers/ManageItems";
 import defaultImage from "../assets/images/default.jpg";
+import { Link } from "react-router-dom";
 
 const ManageItems = ({ items, type }) => {
   return (
@@ -40,7 +41,12 @@ const ManageItems = ({ items, type }) => {
               <h4>{itemData.name}</h4>
               <p>{itemData.review}</p>
               {itemData.productId && (
-                <button className="btn btn--text">#{itemData.productId}</button>
+                <Link
+                  to={`/products/${itemData.productId}`}
+                  className="btn btn--text"
+                >
+                  #{itemData.productId}
+                </Link>
               )}
             </div>
             <div className="btns-container">

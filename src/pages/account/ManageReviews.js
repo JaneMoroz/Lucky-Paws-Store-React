@@ -29,7 +29,7 @@ const ManageReviews = () => {
 
   return (
     <div className="container--outlet">
-      <h2>Manage Products</h2>
+      <h2>Manage Reviews</h2>
       <ManageItems items={reviews} type="reviews" />
     </div>
   );

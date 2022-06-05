@@ -19,7 +19,7 @@ const Navbar = () => {
         <button className="btn" type="button">
           <HiOutlineHeart className="icon" />
         </button>
-        <Link to="/account" className="btn">
+        <Link to="/account/" className="btn">
           <HiOutlineUserCircle className="icon" />
         </Link>
         <button className="btn" type="button">

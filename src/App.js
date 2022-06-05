@@ -9,7 +9,7 @@ import {
   ManageReviews,
   ManageOrders,
   MyOrders,
-  MyOrder,
+  Order,
   MyReviews,
   Settings,
   SharedLayout,
@@ -30,13 +30,13 @@ function App() {
         <Route path="account" element={<SharedLayout />}>
           <Route index element={<Settings />} />
           <Route path="my-orders" element={<MyOrders />} />
-          <Route path="my-orders/:id" element={<MyOrder />} />
+          <Route path="my-orders/:id" element={<Order />} />
           <Route path="my-reviews" element={<MyReviews />} />
           <Route path="manage-products" element={<ManageProducts />} />
           <Route path="manage-users" element={<ManageUsers />} />
           <Route path="manage-reviews" element={<ManageReviews />} />
           <Route path="manage-orders" element={<ManageOrders />} />
-          <Route path="manage-orders/:id" element={<MyOrder />} />
+          <Route path="manage-orders/:id" element={<Order />} />
           <Route path="manage-products/add-product" element={<AddProduct />} />
         </Route>
         <Route path="about" element={<About />} />

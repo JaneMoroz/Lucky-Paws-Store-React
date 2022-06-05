@@ -5,7 +5,7 @@ import { BsKeyFill } from "react-icons/bs";
 import { HiLogout } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../features/user/userSlice";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const UserNavigation = () => {
   const { user } = useSelector((store) => store.user);
@@ -31,7 +31,8 @@ const UserNavigation = () => {
           );
         })}
         <div className="menu-item">
-          <button
+          <Link
+            to="/account/"
             className="btn btn--text btn--logout"
             onClick={() => dispatch(logoutUser("Logging out..."))}
           >
@@ -39,7 +40,7 @@ const UserNavigation = () => {
               <HiLogout />
             </span>
             log out
-          </button>
+          </Link>
         </div>
       </div>
       {user.role === "admin" && <hr />}

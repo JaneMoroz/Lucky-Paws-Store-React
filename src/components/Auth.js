@@ -4,6 +4,7 @@ import { FormRow } from "../components";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser, registerUser } from "../features/user/userSlice";
+import { Link } from "react-router-dom";
 
 const initialState = {
   name: "",
@@ -49,7 +50,7 @@ const Auth = () => {
 
   return (
     <Wrapper>
-      <form className="form" onSubmit={handleSubmit}>
+      <form className="form">
         <h2>{values.isMember ? "Login" : "Sign Up"}</h2>
         {/* name field */}
         {!values.isMember && (
@@ -86,6 +87,7 @@ const Auth = () => {
         )}
         <button
           type="submit"
+          onClick={handleSubmit}
           className="btn btn--outlined"
           disabled={isLoading}
         >

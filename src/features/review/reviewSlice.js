@@ -20,6 +20,19 @@ export const getAllReviews = createAsyncThunk(
   }
 );
 
+export const getMyReviews = createAsyncThunk(
+  "user/getMyReviews",
+  async (_, thunkAPI) => {
+    try {
+      const res = await customFetch.get("/reviews/myReviews");
+      const reviewsData = res.data.data.data;
+      return { reviewsData };
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
 const reviewSlice = createSlice({
   name: "review",
   initialState,
@@ -32,6 +45,17 @@ const reviewSlice = createSlice({
       state.isLoading = false;
     },
     [getAllReviews.rejected]: (state, { payload }) => {
+      state.isLoading = false;
+      toast.error(payload);
+    },
+    [getMyReviews.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [getMyReviews.fulfilled]: (state, { payload }) => {
+      state.reviews = payload.reviewsData;
+      state.isLoading = false;
+    },
+    [getMyReviews.rejected]: (state, { payload }) => {
       state.isLoading = false;
       toast.error(payload);
     },
