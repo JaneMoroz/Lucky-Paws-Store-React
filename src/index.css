@@ -160,7 +160,8 @@ ul {
   transition: all 0.3s;
 }
 
-.btn--outlined:hover {
+.btn--outlined:hover,
+.btn--active {
   background-color: var(--color-text-primary);
   color: #fff;
 }

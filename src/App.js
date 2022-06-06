@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Error, Home, Page, SingleProduct } from "./pages/";
+import { Error, Home, Page, SingleProduct, Cart } from "./pages/";
 import { Navbar } from "./components/";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -39,6 +39,7 @@ function App() {
           <Route path="manage-orders/:id" element={<Order />} />
           <Route path="manage-products/add-product" element={<AddProduct />} />
         </Route>
+        <Route path="cart" element={<Cart />} />
         <Route path="*" element={<Error />} />
       </Routes>
       <ToastContainer position="top-center" />

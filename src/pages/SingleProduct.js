@@ -6,13 +6,18 @@ import { getProductById } from "../features/product/productSlice";
 import { Loader, PageHero, Stars } from "../components";
 import { HiMinus, HiPlus } from "react-icons/hi";
 import { updateFilter } from "../features/product/productSlice";
+import { addItemToCart } from "../features/cart/cartSlice";
 
 const SingleProduct = () => {
   const dispatch = useDispatch();
   const id = useParams().id;
   const { isLoading, product } = useSelector((store) => store.product);
+  const { isLoading: addingToCartLoading } = useSelector((store) => store.cart);
 
   const [main, setMain] = useState(null);
+  const [colorChoice, setColorChoice] = useState(null);
+  const [styleChoice, setStyleChoice] = useState(null);
+  const [amount, setAmount] = useState(1);
 
   useEffect(() => {
     dispatch(getProductById(id));
@@ -21,6 +26,12 @@ const SingleProduct = () => {
   useEffect(() => {
     if (product) {
       setMain(product.primaryImage);
+      if (product.color.length !== 0) {
+        setColorChoice(product.color[0]);
+      }
+      if (product.style.length !== 0) {
+        setStyleChoice(product.style[0]);
+      }
     }
   }, [product]);
 
@@ -38,6 +49,42 @@ const SingleProduct = () => {
     } else {
       dispatch(updateFilter({ name: "brand", value: product.brand }));
     }
+  };
+
+  const handleOption = (e, optionType) => {
+    if (optionType === "color") {
+      setColorChoice(e.target.innerText);
+    } else {
+      setStyleChoice(e.target.innerText);
+    }
+  };
+
+  const handleAmount = (direction) => {
+    if (direction === "inc") {
+      setAmount(amount + 1);
+    }
+    if (direction === "dec") {
+      if (amount > 1) {
+        setAmount(amount - 1);
+      } else {
+        setAmount(1);
+      }
+    }
+  };
+
+  const handleAddToCart = () => {
+    let cartItem = {
+      product: id,
+      purchasePrice: product.price,
+      quantity: amount,
+    };
+    if (styleChoice) {
+      cartItem.style = styleChoice;
+    }
+    if (colorChoice) {
+      cartItem.color = colorChoice;
+    }
+    dispatch(addItemToCart(cartItem));
   };
 
   const {
@@ -110,7 +157,13 @@ const SingleProduct = () => {
                   <h3>Colors:</h3>
                   {colors.map((color, index) => {
                     return (
-                      <button key={index} className="btn btn--outlined">
+                      <button
+                        onClick={(e) => handleOption(e, "color")}
+                        key={index}
+                        className={`btn btn--outlined ${
+                          color === colorChoice ? "btn--active" : ""
+                        }`}
+                      >
                         {color}
                       </button>
                     );
@@ -122,7 +175,13 @@ const SingleProduct = () => {
                   <h3>Styles:</h3>
                   {styles.map((style, index) => {
                     return (
-                      <button key={index} className="btn btn--outlined">
+                      <button
+                        onClick={(e) => handleOption(e, "style")}
+                        key={index}
+                        className={`btn btn--outlined ${
+                          style === styleChoice ? "btn--active" : ""
+                        }`}
+                      >
                         {style}
                       </button>
                     );
@@ -142,19 +201,23 @@ const SingleProduct = () => {
             )}
             <div className="main-footer">
               <div className="quantity">
-                <button className="btn">
+                <button onClick={() => handleAmount("dec")} className="btn">
                   <HiMinus className="icon" />
                 </button>
-                <span>1</span>
-                <button className="btn">
+                <span>{amount}</span>
+                <button onClick={() => handleAmount("inc")} className="btn">
                   <HiPlus className="icon" />
                 </button>
               </div>
               <p className="price">${price}</p>
             </div>
           </div>
-          <button className="btn btn--outlined" disabled={!isActive}>
-            add to cart
+          <button
+            onClick={handleAddToCart}
+            className="btn btn--outlined"
+            disabled={!isActive || addingToCartLoading}
+          >
+            {addingToCartLoading ? "adding..." : "add to cart"}
           </button>
           <Link to="/all" className="btn btn--outlined">
             back to store
