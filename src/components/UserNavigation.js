@@ -19,9 +19,7 @@ const UserNavigation = () => {
               <NavLink
                 to={link.path}
                 className={({ isActive }) => {
-                  return isActive
-                    ? "btn btn--text btn--active"
-                    : "btn btn--text";
+                  return isActive ? "btn btn--text active" : "btn btn--text";
                 }}
               >
                 <span className="icon">{link.icon}</span>
@@ -56,9 +54,7 @@ const UserNavigation = () => {
                 <NavLink
                   to={link.path}
                   className={({ isActive }) => {
-                    return isActive
-                      ? "btn btn--text btn--active"
-                      : "btn btn--text";
+                    return isActive ? "btn btn--text active" : "btn btn--text";
                   }}
                 >
                   <span className="icon">{link.icon}</span>

@@ -1,10 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Wrapper from "../assets/wrappers/Auth";
 import { FormRow } from "../components";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser, registerUser } from "../features/user/userSlice";
-import { Link } from "react-router-dom";
 
 const initialState = {
   name: "",

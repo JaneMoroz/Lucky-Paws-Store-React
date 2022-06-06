@@ -5,9 +5,11 @@ import {
   HiOutlineHeart,
   HiOutlineShoppingBag,
 } from "react-icons/hi";
+import { useSelector } from "react-redux";
 import Wrapper from "../assets/wrappers/Navbar";
 
 const Navbar = () => {
+  const { totalAmount } = useSelector((store) => store.cart);
   return (
     <Wrapper className="container--max">
       <div>
@@ -24,7 +26,7 @@ const Navbar = () => {
         </Link>
         <Link to="cart" className="btn">
           <HiOutlineShoppingBag className="icon" />
-          <span className="cart">1</span>
+          <span className="cart">{totalAmount}</span>
         </Link>
       </div>
     </Wrapper>

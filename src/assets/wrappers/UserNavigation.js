@@ -35,7 +35,7 @@ const Wrapper = styled.div`
   }
 
   .menu-item:hover,
-  .menu-item .btn--active {
+  .menu-item .active {
     color: var(--color-text-primary);
   }
 

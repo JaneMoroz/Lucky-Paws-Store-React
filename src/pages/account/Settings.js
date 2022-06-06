@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { updateUser, updateUserPassword } from "../../features/user/userSlice";
 import defaultImage from "../../assets/images/default.jpg";
+import { getMyCart } from "../../features/cart/cartSlice";
 
 const Settings = () => {
   const { isLoading, user } = useSelector((store) => store.user);
@@ -23,6 +24,10 @@ const Settings = () => {
     password: "",
     passwordConfirm: "",
   });
+
+  useEffect(() => {
+    dispatch(getMyCart());
+  }, []);
 
   useEffect(() => {
     const name = "photoUrl";

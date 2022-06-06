@@ -35,15 +35,17 @@ const Wrapper = styled.nav`
     position: absolute;
     top: 0;
     right: 0;
+    transform: translateX(30%);
     content: "";
-    height: 1.6rem;
-    width: 1.6rem;
+    height: 1.8rem;
+    width: 1.8rem;
     background-color: var(--color-1);
     border-radius: 50%;
     color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 1.2rem;
   }
 `;
 
