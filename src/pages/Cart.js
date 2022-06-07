@@ -4,10 +4,18 @@ import { useSelector, useDispatch } from "react-redux";
 import { FormRow, PageHero } from "../components";
 import { HiChevronUp, HiChevronDown } from "react-icons/hi";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
+import {
+  updateCartItemQuantity,
+  removeCartItem,
+  calculateTotals,
+} from "../features/cart/cartSlice";
 
 const Cart = () => {
+  const dispatch = useDispatch();
   const { cartItems, subtotal, taxes, shippingPrice, total, isLoading } =
     useSelector((store) => store.cart);
+  const { user } = useSelector((store) => store.user);
 
   const [shippingAddress, setShippingAddress] = useState({
     address: "",
@@ -15,6 +23,17 @@ const Cart = () => {
     postalCode: "",
     country: "",
   });
+
+  const handleAmount = (id, style, color, num) => {
+    if (!user) {
+      if (num !== 0) {
+        dispatch(updateCartItemQuantity({ id, amount: num, style, color }));
+      } else {
+        dispatch(removeCartItem({ id, style, color }));
+      }
+      dispatch(calculateTotals());
+    }
+  };
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -32,12 +51,26 @@ const Cart = () => {
     }
   };
 
+  if (cartItems.length === 0) {
+    return (
+      <Wrapper className="container--max">
+        <PageHero page={"cart"} />
+        <div className="cart-container">
+          <p className="empty">You cart is empty.</p>
+          <Link to="/all" className="btn btn--outlined">
+            Go back to store
+          </Link>
+        </div>
+      </Wrapper>
+    );
+  }
+
   return (
     <Wrapper className="container--max">
       <PageHero page={"cart"} />
       <div className="cart-container">
         {cartItems.map((cartItem, index) => {
-          const { name, primaryImage } = cartItem.product;
+          const { id, name, primaryImage } = cartItem.product;
           const { purchasePrice, quantity, style, color } = cartItem;
           return (
             <div key={index} className="cart-item">
@@ -48,11 +81,26 @@ const Cart = () => {
                 {color && <span className="option">color: {color}</span>}
               </div>
               <div className="amount">
-                <button className="btn icon">
+                <button
+                  onClick={() =>
+                    handleAmount(id, style && style, color && color, 1)
+                  }
+                  className="btn icon"
+                >
                   <HiChevronUp />
                 </button>
                 <span>{quantity}</span>
-                <button className="btn icon">
+                <button
+                  onClick={() =>
+                    handleAmount(
+                      id,
+                      style && style,
+                      color && color,
+                      quantity > 1 ? -1 : 0
+                    )
+                  }
+                  className="btn icon"
+                >
                   <HiChevronDown />
                 </button>
               </div>

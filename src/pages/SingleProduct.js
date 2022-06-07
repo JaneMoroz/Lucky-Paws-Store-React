@@ -6,13 +6,21 @@ import { getProductById } from "../features/product/productSlice";
 import { Loader, PageHero, Stars } from "../components";
 import { HiMinus, HiPlus } from "react-icons/hi";
 import { updateFilter } from "../features/product/productSlice";
-import { addItemToCart } from "../features/cart/cartSlice";
+import {
+  addItemToCart,
+  addItemToLocalCart,
+  calculateTotals,
+  updateCartItemQuantity,
+} from "../features/cart/cartSlice";
 
 const SingleProduct = () => {
   const dispatch = useDispatch();
   const id = useParams().id;
+  const { user } = useSelector((store) => store.user);
   const { isLoading, product } = useSelector((store) => store.product);
-  const { isLoading: addingToCartLoading } = useSelector((store) => store.cart);
+  const { isLoading: addingToCartLoading, cartItems } = useSelector(
+    (store) => store.cart
+  );
 
   const [main, setMain] = useState(null);
   const [colorChoice, setColorChoice] = useState(null);
@@ -74,7 +82,6 @@ const SingleProduct = () => {
 
   const handleAddToCart = () => {
     let cartItem = {
-      product: id,
       purchasePrice: product.price,
       quantity: amount,
     };
@@ -84,7 +91,41 @@ const SingleProduct = () => {
     if (colorChoice) {
       cartItem.color = colorChoice;
     }
-    dispatch(addItemToCart(cartItem));
+    if (user) {
+      cartItem.product = id;
+      dispatch(addItemToCart(cartItem));
+    } else {
+      let tempCartItem = null;
+      if (styleChoice) {
+        tempCartItem = cartItems.find(
+          (item) => item.product.id === id && item.style === styleChoice
+        );
+      }
+      if (colorChoice) {
+        tempCartItem = cartItems.find(
+          (item) => item.product.id === id && item.color === colorChoice
+        );
+      }
+      if (tempCartItem) {
+        dispatch(
+          updateCartItemQuantity({
+            id,
+            amount,
+            style: styleChoice,
+            color: colorChoice,
+          })
+        );
+      } else {
+        cartItem.product = {
+          id,
+          name,
+          primaryImage,
+        };
+
+        dispatch(addItemToLocalCart(cartItem));
+      }
+      dispatch(calculateTotals());
+    }
   };
 
   const {
