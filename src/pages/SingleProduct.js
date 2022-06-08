@@ -7,10 +7,11 @@ import { Loader, PageHero, Stars } from "../components";
 import { HiMinus, HiPlus } from "react-icons/hi";
 import { updateFilter } from "../features/product/productSlice";
 import {
-  addItemToCart,
+  toggleCartItemsAreUpdated,
   addItemToLocalCart,
   calculateTotals,
   updateCartItemQuantity,
+  updateMyCart,
 } from "../features/cart/cartSlice";
 
 const SingleProduct = () => {
@@ -18,9 +19,11 @@ const SingleProduct = () => {
   const id = useParams().id;
   const { user } = useSelector((store) => store.user);
   const { isLoading, product } = useSelector((store) => store.product);
-  const { isLoading: addingToCartLoading, cartItems } = useSelector(
-    (store) => store.cart
-  );
+  const {
+    isLoading: addingToCartLoading,
+    cartItems,
+    cartItemsUpdated,
+  } = useSelector((store) => store.cart);
 
   const [main, setMain] = useState(null);
   const [colorChoice, setColorChoice] = useState(null);
@@ -42,6 +45,13 @@ const SingleProduct = () => {
       }
     }
   }, [product]);
+
+  useEffect(() => {
+    if (cartItemsUpdated && user) {
+      dispatch(updateMyCart(cartItems));
+      dispatch(toggleCartItemsAreUpdated());
+    }
+  }, [cartItemsUpdated]);
 
   if (isLoading) {
     return <Loader />;
@@ -85,46 +95,49 @@ const SingleProduct = () => {
       purchasePrice: product.price,
       quantity: quantity,
     };
+
+    let tempCartItem = null;
+
     if (styleChoice) {
       cartItem.style = styleChoice;
+      tempCartItem = cartItems.find(
+        (item) => item.product.id === id && item.style === styleChoice
+      );
     }
     if (colorChoice) {
       cartItem.color = colorChoice;
+      tempCartItem = cartItems.find(
+        (item) => item.product.id === id && item.color === colorChoice
+      );
     }
-    if (user) {
-      cartItem.product = id;
-      dispatch(addItemToCart(cartItem));
+
+    if (tempCartItem) {
+      dispatch(
+        updateCartItemQuantity({
+          id,
+          quantity,
+          style: styleChoice,
+          color: colorChoice,
+        })
+      );
     } else {
-      let tempCartItem = null;
-      if (styleChoice) {
-        tempCartItem = cartItems.find(
-          (item) => item.product.id === id && item.style === styleChoice
-        );
-      }
-      if (colorChoice) {
-        tempCartItem = cartItems.find(
-          (item) => item.product.id === id && item.color === colorChoice
-        );
-      }
-      if (tempCartItem) {
-        dispatch(
-          updateCartItemQuantity({
-            id,
-            quantity,
-            style: styleChoice,
-            color: colorChoice,
-          })
-        );
-      } else {
+      if (!user) {
         cartItem.product = {
           id,
           name,
           primaryImage,
         };
-
-        dispatch(addItemToLocalCart(cartItem));
+      } else {
+        cartItem.product = id;
       }
+
+      dispatch(addItemToLocalCart(cartItem));
+    }
+
+    if (!user) {
       dispatch(calculateTotals());
+    } else {
+      dispatch(toggleCartItemsAreUpdated());
     }
   };
 

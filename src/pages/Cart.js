@@ -10,12 +10,20 @@ import {
   removeCartItem,
   calculateTotals,
   updateMyCart,
+  toggleCartItemsAreUpdated,
 } from "../features/cart/cartSlice";
 
 const Cart = () => {
   const dispatch = useDispatch();
-  const { cartItems, subtotal, taxes, shippingPrice, total, isLoading } =
-    useSelector((store) => store.cart);
+  const {
+    cartItems,
+    subtotal,
+    taxes,
+    shippingPrice,
+    total,
+    isLoading,
+    cartItemsUpdated,
+  } = useSelector((store) => store.cart);
   const { user } = useSelector((store) => store.user);
 
   const [shippingAddress, setShippingAddress] = useState({
@@ -25,12 +33,10 @@ const Cart = () => {
     country: "",
   });
 
-  const [cartItemsUpdated, setCartItemsUpdated] = useState(false);
-
   useEffect(() => {
     if (cartItemsUpdated && user) {
       dispatch(updateMyCart(cartItems));
-      setCartItemsUpdated(false);
+      dispatch(toggleCartItemsAreUpdated());
     }
   }, [cartItemsUpdated]);
 
@@ -43,7 +49,7 @@ const Cart = () => {
     if (!user) {
       dispatch(calculateTotals());
     } else {
-      setCartItemsUpdated(true);
+      dispatch(toggleCartItemsAreUpdated());
     }
   };
 

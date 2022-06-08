@@ -17,6 +17,7 @@ const initialState = {
   shippingPrice: cart?.shippingPrice || 0,
   total: cart?.total || 0,
   isLoading: false,
+  cartItemsUpdated: false,
 };
 
 const setCart = (state, cart) => {
@@ -55,23 +56,14 @@ export const updateMyCart = createAsyncThunk(
   }
 );
 
-export const addItemToCart = createAsyncThunk(
-  "cart/addItemToCart",
-  async (cartItem, thunkAPI) => {
-    try {
-      const res = await customFetch.post("/cart", cartItem);
-      const cartData = res.data.data.data;
-      return { cartData };
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data.message);
-    }
-  }
-);
-
 const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
+    toggleCartItemsAreUpdated: (state) => {
+      const oldValue = state.cartItemsUpdated;
+      state.cartItemsUpdated = !oldValue;
+    },
     clearCart: (state) => {
       state.cartItems = [];
     },
@@ -157,18 +149,6 @@ const cartSlice = createSlice({
       state.isLoading = true;
     },
     [updateMyCart.fulfilled]: (state, { payload }) => {
-      setCart(state, payload.cartData);
-      state.isLoading = false;
-      addCartToLocalStorage(state);
-    },
-    [updateMyCart.rejected]: (state, { payload }) => {
-      state.isLoading = false;
-      toast.error(payload);
-    },
-    [addItemToCart.pending]: (state) => {
-      state.isLoading = true;
-    },
-    [addItemToCart.fulfilled]: (state, { payload }) => {
       state.totalQuantity = payload.cartData.products.reduce(
         (total, cartItem) => {
           const { quantity } = cartItem;
@@ -177,12 +157,11 @@ const cartSlice = createSlice({
         },
         0
       );
-      toast.success("Product is added to cart");
       setCart(state, payload.cartData);
       state.isLoading = false;
       addCartToLocalStorage(state);
     },
-    [addItemToCart.rejected]: (state, { payload }) => {
+    [updateMyCart.rejected]: (state, { payload }) => {
       state.isLoading = false;
       toast.error(payload);
     },
@@ -190,6 +169,7 @@ const cartSlice = createSlice({
 });
 
 export const {
+  toggleCartItemsAreUpdated,
   clearCart,
   addItemToLocalCart,
   calculateTotals,
