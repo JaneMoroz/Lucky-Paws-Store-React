@@ -29,7 +29,7 @@ const setCart = (state, cart) => {
 };
 
 export const getMyCart = createAsyncThunk(
-  "user/getMyCart",
+  "cart/getMyCart",
   async (_, thunkAPI) => {
     try {
       const res = await customFetch.get("/cart/myCart?ordered=false");

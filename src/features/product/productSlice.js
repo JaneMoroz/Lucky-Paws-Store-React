@@ -20,7 +20,7 @@ const initialState = {
 };
 
 export const getAllProducts = createAsyncThunk(
-  "user/getAllProducts",
+  "product/getAllProducts",
   async (_, thunkAPI) => {
     try {
       const res = await customFetch.get("/products");
@@ -33,7 +33,7 @@ export const getAllProducts = createAsyncThunk(
 );
 
 export const getProducts = createAsyncThunk(
-  "user/getProducts",
+  "product/getProducts",
   async (_, thunkAPI) => {
     const { animal, sort, type, brand } = thunkAPI.getState().product;
     const url = `/products?sort=${sort}${animal ? `&animal=${animal}` : ""}${
@@ -51,7 +51,7 @@ export const getProducts = createAsyncThunk(
 );
 
 export const getProductById = createAsyncThunk(
-  "user/getProductById",
+  "product/getProductById",
   async (id, thunkAPI) => {
     try {
       const res = await customFetch.get(`/products/${id}`);
@@ -64,7 +64,7 @@ export const getProductById = createAsyncThunk(
 );
 
 export const addNewProduct = createAsyncThunk(
-  "user/addNewProduct",
+  "product/addNewProduct",
   async (product, thunkAPI) => {
     try {
       const res = await customFetch.post("/products", product);

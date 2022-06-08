@@ -10,7 +10,7 @@ const initialState = {
 };
 
 export const getMyOrders = createAsyncThunk(
-  "user/getMyOrders",
+  "order/getMyOrders",
   async (_, thunkAPI) => {
     try {
       const res = await customFetch.get("/order/myOrders");
@@ -23,7 +23,7 @@ export const getMyOrders = createAsyncThunk(
 );
 
 export const getMyOrder = createAsyncThunk(
-  "user/getMyOrder",
+  "order/getMyOrder",
   async (id, thunkAPI) => {
     try {
       const res = await customFetch.get(`/order/myOrders/${id}`);
@@ -36,7 +36,7 @@ export const getMyOrder = createAsyncThunk(
 );
 
 export const getAllOrders = createAsyncThunk(
-  "user/getAllOrders",
+  "order/getAllOrders",
   async (_, thunkAPI) => {
     try {
       const res = await customFetch.get("/order");
@@ -49,7 +49,7 @@ export const getAllOrders = createAsyncThunk(
 );
 
 export const getOrderById = createAsyncThunk(
-  "user/getOrderById",
+  "order/getOrderById",
   async (id, thunkAPI) => {
     try {
       const res = await customFetch.get(`/order/${id}`);

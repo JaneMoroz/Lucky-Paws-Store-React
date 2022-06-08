@@ -8,7 +8,7 @@ const initialState = {
 };
 
 export const getAllReviews = createAsyncThunk(
-  "user/getAllReviews",
+  "review/getAllReviews",
   async (_, thunkAPI) => {
     try {
       const res = await customFetch.get("/reviews");
@@ -21,7 +21,7 @@ export const getAllReviews = createAsyncThunk(
 );
 
 export const getMyReviews = createAsyncThunk(
-  "user/getMyReviews",
+  "review/getMyReviews",
   async (_, thunkAPI) => {
     try {
       const res = await customFetch.get("/reviews/myReviews");
