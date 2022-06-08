@@ -25,7 +25,7 @@ const SingleProduct = () => {
   const [main, setMain] = useState(null);
   const [colorChoice, setColorChoice] = useState(null);
   const [styleChoice, setStyleChoice] = useState(null);
-  const [amount, setAmount] = useState(1);
+  const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
     dispatch(getProductById(id));
@@ -67,15 +67,15 @@ const SingleProduct = () => {
     }
   };
 
-  const handleAmount = (direction) => {
+  const handleQuantity = (direction) => {
     if (direction === "inc") {
-      setAmount(amount + 1);
+      setQuantity(quantity + 1);
     }
     if (direction === "dec") {
-      if (amount > 1) {
-        setAmount(amount - 1);
+      if (quantity > 1) {
+        setQuantity(quantity - 1);
       } else {
-        setAmount(1);
+        setQuantity(1);
       }
     }
   };
@@ -83,7 +83,7 @@ const SingleProduct = () => {
   const handleAddToCart = () => {
     let cartItem = {
       purchasePrice: product.price,
-      quantity: amount,
+      quantity: quantity,
     };
     if (styleChoice) {
       cartItem.style = styleChoice;
@@ -110,7 +110,7 @@ const SingleProduct = () => {
         dispatch(
           updateCartItemQuantity({
             id,
-            amount,
+            quantity,
             style: styleChoice,
             color: colorChoice,
           })
@@ -242,11 +242,11 @@ const SingleProduct = () => {
             )}
             <div className="main-footer">
               <div className="quantity">
-                <button onClick={() => handleAmount("dec")} className="btn">
+                <button onClick={() => handleQuantity("dec")} className="btn">
                   <HiMinus className="icon" />
                 </button>
-                <span>{amount}</span>
-                <button onClick={() => handleAmount("inc")} className="btn">
+                <span>{quantity}</span>
+                <button onClick={() => handleQuantity("inc")} className="btn">
                   <HiPlus className="icon" />
                 </button>
               </div>

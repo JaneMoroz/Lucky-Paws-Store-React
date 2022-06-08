@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { updateUser, updateUserPassword } from "../../features/user/userSlice";
 import defaultImage from "../../assets/images/default.jpg";
-import { getMyCart, createCart } from "../../features/cart/cartSlice";
+import { getMyCart, updateMyCart } from "../../features/cart/cartSlice";
 
 const Settings = () => {
   const { cartId, cartItems } = useSelector((store) => store.cart);
@@ -31,13 +31,14 @@ const Settings = () => {
     // if cart from locale storage is NOT empty, copy it to the server (or replace if user cart already exists on the server)
     if (cartItems.length === 0) {
       dispatch(getMyCart());
-    } else if (!cartId && cartItems.length !== 0) {
+    } else if (cartItems.length !== 0) {
+      console.log("creating Cart");
       let tempCartItems = [...cartItems];
       tempCartItems = tempCartItems.map((item) => {
         const id = item.product.id;
         return { ...item, product: id };
       });
-      dispatch(createCart(tempCartItems));
+      dispatch(updateMyCart(tempCartItems));
     }
   }, []);
 

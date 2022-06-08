@@ -36,7 +36,7 @@ const Wrapper = styled.div`
       color: var(--color-grey);
     }
 
-    .amount {
+    .quantity {
       font-size: 1.8rem;
       display: flex;
       flex-direction: column;

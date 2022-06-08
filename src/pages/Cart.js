@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Wrapper from "../assets/wrappers/Cart";
 import { useSelector, useDispatch } from "react-redux";
 import { FormRow, PageHero } from "../components";
@@ -9,6 +9,7 @@ import {
   updateCartItemQuantity,
   removeCartItem,
   calculateTotals,
+  updateMyCart,
 } from "../features/cart/cartSlice";
 
 const Cart = () => {
@@ -24,14 +25,25 @@ const Cart = () => {
     country: "",
   });
 
-  const handleAmount = (id, style, color, num) => {
+  const [cartItemsUpdated, setCartItemsUpdated] = useState(false);
+
+  useEffect(() => {
+    if (cartItemsUpdated && user) {
+      dispatch(updateMyCart(cartItems));
+      setCartItemsUpdated(false);
+    }
+  }, [cartItemsUpdated]);
+
+  const handleQuantity = (id, style, color, num) => {
+    if (num !== 0) {
+      dispatch(updateCartItemQuantity({ id, quantity: num, style, color }));
+    } else {
+      dispatch(removeCartItem({ id, style, color }));
+    }
     if (!user) {
-      if (num !== 0) {
-        dispatch(updateCartItemQuantity({ id, amount: num, style, color }));
-      } else {
-        dispatch(removeCartItem({ id, style, color }));
-      }
       dispatch(calculateTotals());
+    } else {
+      setCartItemsUpdated(true);
     }
   };
 
@@ -46,7 +58,7 @@ const Cart = () => {
 
     const { address, city, postalCode, country } = shippingAddress;
     if (!address || !city || !postalCode || !country) {
-      toast.error("please fill out all address fields");
+      toast.error("Please fill out all address fields!");
       return;
     }
   };
@@ -80,11 +92,12 @@ const Cart = () => {
                 {style && <span className="option">style: {style}</span>}
                 {color && <span className="option">color: {color}</span>}
               </div>
-              <div className="amount">
+              <div className="quantity">
                 <button
                   onClick={() =>
-                    handleAmount(id, style && style, color && color, 1)
+                    handleQuantity(id, style && style, color && color, 1)
                   }
+                  disabled={isLoading}
                   className="btn icon"
                 >
                   <HiChevronUp />
@@ -92,13 +105,14 @@ const Cart = () => {
                 <span>{quantity}</span>
                 <button
                   onClick={() =>
-                    handleAmount(
+                    handleQuantity(
                       id,
                       style && style,
                       color && color,
                       quantity > 1 ? -1 : 0
                     )
                   }
+                  disabled={isLoading}
                   className="btn icon"
                 >
                   <HiChevronDown />
@@ -113,18 +127,24 @@ const Cart = () => {
             <span>Subtotal:</span>
             <span>${subtotal}</span>
           </div>
-          <div className="line">
-            <span>Taxes:</span>
-            <span>${taxes}</span>
-          </div>
-          <div className="line">
-            <span>Shipping Price:</span>
-            <span>${shippingPrice}</span>
-          </div>
-          <div className="line total">
-            <span>Total:</span>
-            <span>${total}</span>
-          </div>
+          {user && (
+            <div className="line">
+              <span>Taxes:</span>
+              <span>${taxes}</span>
+            </div>
+          )}
+          {user && (
+            <div className="line">
+              <span>Shipping Price:</span>
+              <span>${shippingPrice}</span>
+            </div>
+          )}
+          {user && (
+            <div className="line total">
+              <span>Total:</span>
+              <span>${total}</span>
+            </div>
+          )}
         </div>
         <form className="address" onSubmit={handleSubmit}>
           <FormRow
@@ -152,11 +172,20 @@ const Cart = () => {
             value={shippingAddress.country}
             handleChange={handleChange}
           />
-          <button type="submit" className="btn btn--outlined">
-            Pay
-          </button>
+          {!user && (
+            <Link to="/account/" className="btn btn--outlined">
+              log in
+            </Link>
+          )}
+          {user && (
+            <button type="submit" className="btn btn--outlined">
+              Pay
+            </button>
+          )}
         </form>
-        <button className="btn btn--outlined">back to store</button>
+        <Link to="/all" className="btn btn--outlined">
+          back to store
+        </Link>
       </div>
     </Wrapper>
   );

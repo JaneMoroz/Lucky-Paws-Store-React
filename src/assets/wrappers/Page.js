@@ -116,7 +116,7 @@ const Wrapper = styled.div`
   }
 
   .background--3 {
-    bottom: 0;
+    top: 0; // bottom doesn't work
     left: 0;
     background-color: var(--background-3);
     animation: expand 1s ease-in-out;
@@ -136,8 +136,8 @@ const Wrapper = styled.div`
     }
 
     to {
-      height: 100%;
-      width: 100%;
+      height: 100vh;
+      width: 100vw;
     }
   }
 

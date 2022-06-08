@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
-    <Wrapper>
+    <Wrapper className="container--max">
       <div className="section section--1">
         <img className="img" src={img1} alt="for dogs" />
         <Link to="/dog" className="btn">
