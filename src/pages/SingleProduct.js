@@ -39,9 +39,13 @@ const SingleProduct = () => {
       setMain(product.primaryImage);
       if (product.color.length !== 0) {
         setColorChoice(product.color[0]);
+      } else {
+        setColorChoice(null);
       }
       if (product.style.length !== 0) {
         setStyleChoice(product.style[0]);
+      } else {
+        setStyleChoice(null);
       }
     }
   }, [product]);
@@ -109,6 +113,9 @@ const SingleProduct = () => {
       tempCartItem = cartItems.find(
         (item) => item.product.id === id && item.color === colorChoice
       );
+    }
+    if (!colorChoice && !styleChoice) {
+      tempCartItem = cartItems.find((item) => item.product.id === id);
     }
 
     if (tempCartItem) {

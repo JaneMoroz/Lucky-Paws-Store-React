@@ -41,8 +41,8 @@ const UserNavigation = () => {
           </Link>
         </div>
       </div>
-      {user.role === "admin" && <hr />}
-      {user.role === "admin" && (
+      {(user.role === "admin" || user.role === "test") && <hr />}
+      {(user.role === "admin" || user.role === "test") && (
         <div className="menu">
           <span className="admin">
             <BsKeyFill />

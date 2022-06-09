@@ -39,7 +39,6 @@ export const getProducts = createAsyncThunk(
     const url = `/products?sort=${sort}${animal ? `&animal=${animal}` : ""}${
       type !== "all" ? `&type=${type}` : ""
     }${brand !== "all" ? `&brand=${brand}` : ""}`;
-    console.log(url);
     try {
       const res = await customFetch.get(url);
       const productsData = res.data.data.data;
@@ -70,6 +69,17 @@ export const addNewProduct = createAsyncThunk(
       const res = await customFetch.post("/products", product);
       const productData = res.data.data.data;
       return { productData };
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
+export const deleteProduct = createAsyncThunk(
+  "product/deleteProduct",
+  async (productId, thunkAPI) => {
+    try {
+      await customFetch.delete(`/products/${productId}`);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data.message);
     }
@@ -149,6 +159,17 @@ const productSlice = createSlice({
     [getProducts.rejected]: (state, { payload }) => {
       state.isLoading = false;
       toast.error(payload);
+    },
+    [deleteProduct.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [deleteProduct.fulfilled]: (state, { payload }) => {
+      toast.success(`Product is deleted`);
+      state.isLoading = false;
+    },
+    [deleteProduct.rejected]: (state, { payload }) => {
+      toast.success(`You don't have permission to perform this action!`);
+      state.isLoading = false;
     },
   },
 });

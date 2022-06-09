@@ -55,12 +55,17 @@ const AddProduct = () => {
       return;
     }
 
+    const animalTemp = [animal.toLowerCase()];
+    if (animalTemp === "All") {
+      animalTemp = ["cat", "dog"];
+    }
+
     const newProduct = {
       name: name.toLowerCase(),
-      brand: "",
-      animal: [animal.toLowerCase()],
+      brand: brand,
+      animal: animalTemp,
       type: type.toLowerCase(),
-      // subType: subType.toLowerCase(),
+      subType: subType.toLowerCase(),
       price: price,
       countInStock: countInStock,
       features: [],

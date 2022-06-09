@@ -8,7 +8,7 @@ import defaultImage from "../../assets/images/default.jpg";
 import { getMyCart, updateMyCart } from "../../features/cart/cartSlice";
 
 const Settings = () => {
-  const { cartId, cartItems } = useSelector((store) => store.cart);
+  const { cartItems } = useSelector((store) => store.cart);
   const { isLoading, user } = useSelector((store) => store.user);
   const dispatch = useDispatch();
 
@@ -32,7 +32,6 @@ const Settings = () => {
     if (cartItems.length === 0) {
       dispatch(getMyCart());
     } else if (cartItems.length !== 0) {
-      console.log("creating Cart");
       let tempCartItems = [...cartItems];
       tempCartItems = tempCartItems.map((item) => {
         const id = item.product.id;

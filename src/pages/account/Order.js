@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getMyOrder, getOrderById } from "../../features/order/orderSlice";
 import { Loader } from "../../components";
-import Wrapper from "../../assets/wrappers/MyOrder";
+import Wrapper from "../../assets/wrappers/Order";
 import moment from "moment";
 import { Link } from "react-router-dom";
 
@@ -26,6 +26,15 @@ const MyOrder = () => {
     isDelivered: order?.isDelivered || false,
   });
 
+  useEffect(() => {
+    if (order) {
+      setOrderData({
+        isPaid: order.isPaid,
+        isDelivered: order.isDelivered,
+      });
+    }
+  }, [order]);
+
   if (isLoading) {
     return <Loader />;
   }
@@ -34,7 +43,14 @@ const MyOrder = () => {
     return;
   }
 
-  const { cart, created, isDelivered, isPaid, shippingAddress } = order;
+  const {
+    cart,
+    created,
+    isDelivered,
+    isPaid,
+    shippingAddress,
+    user: orderUser,
+  } = order;
   const date = moment(created).format("LLL");
 
   const handleChange = (e) => {
@@ -84,7 +100,7 @@ const MyOrder = () => {
         </div>
         <div className="order-details">
           <div className="order-user">
-            <p>{user.name}</p>
+            <p>{orderUser.name}</p>
             <p>{`${shippingAddress.address}, ${shippingAddress.city}, ${shippingAddress.postalCode}, ${shippingAddress.country}`}</p>
           </div>
           {user.role === "user" && (
@@ -107,7 +123,7 @@ const MyOrder = () => {
               </div>
             </div>
           )}
-          {user.role === "admin" && (
+          {(user.role === "admin" || user.role === "test") && (
             <div className="order-status">
               <div className="form-check">
                 <input
@@ -116,6 +132,7 @@ const MyOrder = () => {
                   id="isPaid"
                   onChange={handleChange}
                   checked={orderData.isPaid}
+                  disabled={order.isPaid}
                 />
                 <label htmlFor="isPaid">Paid</label>
               </div>
@@ -126,6 +143,7 @@ const MyOrder = () => {
                   id="isDelivered"
                   onChange={handleChange}
                   checked={orderData.isDelivered}
+                  disabled={order.isDelivered}
                 />
                 <label htmlFor="isDelivered">Delivered</label>
               </div>
@@ -133,7 +151,7 @@ const MyOrder = () => {
           )}
         </div>
       </div>
-      {user.role === "admin" && (
+      {(user.role === "admin" || user.role === "test") && (
         <button className="btn btn--outlined">Save changes</button>
       )}
       <Link

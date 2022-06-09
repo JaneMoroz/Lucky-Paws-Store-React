@@ -1,5 +1,5 @@
 import { BsGear, BsCart, BsStar, BsCreditCard, BsFolder } from "react-icons/bs";
-import { HiOutlineUsers, HiOutlineCash, HiLogout } from "react-icons/hi";
+import { HiOutlineUsers, HiOutlineCash } from "react-icons/hi";
 
 export const userLinks = [
   { id: 1, text: "settings", path: "/account/", icon: <BsGear /> },

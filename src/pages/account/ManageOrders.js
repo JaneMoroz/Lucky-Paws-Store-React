@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllOrders } from "../../features/order/orderSlice";
-import { Loader, ManageItems } from "../../components";
+import { Loader } from "../../components";
 import { OrderItem } from "../../components";
 
 const ManageOrders = () => {

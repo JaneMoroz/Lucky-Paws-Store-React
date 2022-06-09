@@ -48,7 +48,6 @@ export const updateMyCart = createAsyncThunk(
     try {
       const res = await customFetch.post("/cart/myCart", cartItems);
       const cartData = res.data.data.data;
-      console.log(cartData);
       return { cartData };
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data.message);
@@ -63,9 +62,12 @@ const cartSlice = createSlice({
     toggleCartItemsAreUpdated: (state) => {
       const oldValue = state.cartItemsUpdated;
       state.cartItemsUpdated = !oldValue;
+      addCartToLocalStorage(state);
     },
     clearCart: (state) => {
       state.cartItems = [];
+      state.totalQuantity = 0;
+      addCartToLocalStorage(state);
     },
     addItemToLocalCart: (state, { payload }) => {
       state.cartItems.push(payload);
@@ -112,12 +114,14 @@ const cartSlice = createSlice({
       if (state.cartItems.length !== 0) {
         let quantity = 0;
         let subtotal = 0;
-        state.cartItems.forEach((item) => {
+        state.cartItems.forEach((item, index) => {
           quantity += item.quantity;
           subtotal += item.quantity * item.purchasePrice;
         });
         state.totalQuantity = quantity;
         state.subtotal = subtotal.toFixed(2);
+      } else {
+        state.totalQuantity = 0;
       }
       addCartToLocalStorage(state);
     },

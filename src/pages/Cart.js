@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Wrapper from "../assets/wrappers/Cart";
 import { useSelector, useDispatch } from "react-redux";
-import { FormRow, PageHero } from "../components";
+import { PageHero } from "../components";
 import { HiChevronUp, HiChevronDown } from "react-icons/hi";
-import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import {
   updateCartItemQuantity,
@@ -11,11 +10,15 @@ import {
   calculateTotals,
   updateMyCart,
   toggleCartItemsAreUpdated,
+  clearCart,
 } from "../features/cart/cartSlice";
+import { getCheckoutSession } from "../features/order/orderSlice";
+import { toast } from "react-toastify";
 
 const Cart = () => {
   const dispatch = useDispatch();
   const {
+    cartId,
     cartItems,
     subtotal,
     taxes,
@@ -25,13 +28,6 @@ const Cart = () => {
     cartItemsUpdated,
   } = useSelector((store) => store.cart);
   const { user } = useSelector((store) => store.user);
-
-  const [shippingAddress, setShippingAddress] = useState({
-    address: "",
-    city: "",
-    postalCode: "",
-    country: "",
-  });
 
   useEffect(() => {
     if (cartItemsUpdated && user) {
@@ -53,20 +49,10 @@ const Cart = () => {
     }
   };
 
-  const handleChange = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    setShippingAddress({ ...shippingAddress, [name]: value });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    const { address, city, postalCode, country } = shippingAddress;
-    if (!address || !city || !postalCode || !country) {
-      toast.error("Please fill out all address fields!");
-      return;
-    }
+  const goToCheckout = () => {
+    toast.success("You'll be redirected to the payment page shortly!");
+    dispatch(clearCart());
+    dispatch(getCheckoutSession(cartId));
   };
 
   if (cartItems.length === 0) {
@@ -152,43 +138,11 @@ const Cart = () => {
             </div>
           )}
         </div>
-        <form className="address" onSubmit={handleSubmit}>
-          <FormRow
-            type="text"
-            name="address"
-            value={shippingAddress.address}
-            handleChange={handleChange}
-          />
-          <FormRow
-            type="text"
-            name="city"
-            value={shippingAddress.city}
-            handleChange={handleChange}
-          />
-          <FormRow
-            type="text"
-            name="postalCode"
-            value={shippingAddress.postalCode}
-            handleChange={handleChange}
-            placeholderText="postal code"
-          />
-          <FormRow
-            type="text"
-            name="country"
-            value={shippingAddress.country}
-            handleChange={handleChange}
-          />
-          {!user && (
-            <Link to="/account/" className="btn btn--outlined">
-              log in
-            </Link>
-          )}
-          {user && (
-            <button type="submit" className="btn btn--outlined">
-              Pay
-            </button>
-          )}
-        </form>
+        {user && (
+          <button className="btn btn--outlined" onClick={goToCheckout}>
+            Pay
+          </button>
+        )}
         <Link to="/all" className="btn btn--outlined">
           back to store
         </Link>
