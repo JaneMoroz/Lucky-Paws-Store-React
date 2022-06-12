@@ -46,7 +46,7 @@ export const updateMyCart = createAsyncThunk(
   "cart/updateMyCart",
   async (cartItems, thunkAPI) => {
     try {
-      const res = await customFetch.post("/cart/myCart", cartItems);
+      const res = await customFetch.patch("/cart/myCart", cartItems);
       const cartData = res.data.data.data;
       return { cartData };
     } catch (error) {

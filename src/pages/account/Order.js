@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getMyOrder, getOrderById } from "../../features/order/orderSlice";
+import {
+  getMyOrder,
+  getOrderById,
+  updateOrderToDelivered,
+} from "../../features/order/orderSlice";
 import { Loader } from "../../components";
 import Wrapper from "../../assets/wrappers/Order";
 import moment from "moment";
@@ -53,9 +57,10 @@ const MyOrder = () => {
   } = order;
   const date = moment(created).format("LLL");
 
-  const handleChange = (e) => {
+  const handleCheckbox = (e) => {
     let name = e.target.name;
     let value = e.target.checked;
+    dispatch(updateOrderToDelivered(order.id));
     setOrderData({ ...orderData, [name]: value });
   };
 
@@ -130,7 +135,7 @@ const MyOrder = () => {
                   type="checkbox"
                   name="isPaid"
                   id="isPaid"
-                  onChange={handleChange}
+                  onChange={handleCheckbox}
                   checked={orderData.isPaid}
                   disabled={order.isPaid}
                 />
@@ -141,7 +146,7 @@ const MyOrder = () => {
                   type="checkbox"
                   name="isDelivered"
                   id="isDelivered"
-                  onChange={handleChange}
+                  onChange={handleCheckbox}
                   checked={orderData.isDelivered}
                   disabled={order.isDelivered}
                 />
@@ -151,9 +156,6 @@ const MyOrder = () => {
           )}
         </div>
       </div>
-      {(user.role === "admin" || user.role === "test") && (
-        <button className="btn btn--outlined">Save changes</button>
-      )}
       <Link
         to={`${
           user.role === "admin"

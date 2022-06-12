@@ -8,7 +8,6 @@ import { useDispatch } from "react-redux";
 
 const ManageItems = ({ items, type }) => {
   const dispatch = useDispatch();
-  const deleteProductHandler = (id) => {};
   return (
     <Wrapper>
       {items.map((item, index) => {

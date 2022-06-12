@@ -76,6 +76,19 @@ export const getCheckoutSession = createAsyncThunk(
   }
 );
 
+export const updateOrderToDelivered = createAsyncThunk(
+  "order/updateOrderToDelivered",
+  async (orderId, thunkAPI) => {
+    try {
+      const res = await customFetch.patch(`/order/${orderId}/deliver`);
+      const orderData = res.data.data.data;
+      return { orderData };
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
 const orderSlice = createSlice({
   name: "order",
   initialState,
@@ -137,6 +150,17 @@ const orderSlice = createSlice({
         "Something went wrong. Try again later or contact the support."
       );
       state.isLoading = false;
+    },
+    [updateOrderToDelivered.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [updateOrderToDelivered.fulfilled]: (state, { payload }) => {
+      state.order = payload.orderData;
+      state.isLoading = false;
+    },
+    [updateOrderToDelivered.rejected]: (state, { payload }) => {
+      state.isLoading = false;
+      toast.error(payload);
     },
   },
 });
