@@ -33,7 +33,7 @@ const AddProduct = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const {
+    let {
       name,
       brand,
       animal,
@@ -55,15 +55,18 @@ const AddProduct = () => {
       return;
     }
 
-    const animalTemp = [animal.toLowerCase()];
-    if (animalTemp === "All") {
-      animalTemp = ["cat", "dog"];
+    if (animal.toLowerCase() === "all") {
+      animal = ["cat", "dog"];
+    }
+
+    if (brand === "") {
+      brand = "lucky paws";
     }
 
     const newProduct = {
       name: name.toLowerCase(),
       brand: brand,
-      animal: animalTemp,
+      animal: animal,
       type: type.toLowerCase(),
       subType: subType.toLowerCase(),
       price: price,

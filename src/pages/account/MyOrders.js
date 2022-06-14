@@ -3,6 +3,7 @@ import Wrapper from "../../assets/wrappers/Orders";
 import { OrderItem, Loader } from "../../components";
 import { useDispatch, useSelector } from "react-redux";
 import { getMyOrders } from "../../features/order/orderSlice";
+import { Link } from "react-router-dom";
 
 const MyOrders = () => {
   const { isLoading, orders } = useSelector((store) => store.order);
@@ -22,7 +23,9 @@ const MyOrders = () => {
         <h2>Your orders</h2>
         <div className="container">
           <p className="empty">You have no orders.</p>
-          <button className="btn btn--outlined">back to store</button>
+          <Link to="/all" className="btn btn--outlined">
+            back to store
+          </Link>
         </div>
       </Wrapper>
     );

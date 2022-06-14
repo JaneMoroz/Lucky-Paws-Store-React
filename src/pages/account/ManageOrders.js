@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllOrders } from "../../features/order/orderSlice";
 import { Loader } from "../../components";
 import { OrderItem } from "../../components";
+import { Link } from "react-router-dom";
 
 const ManageOrders = () => {
   const { isLoading, allOrders } = useSelector((store) => store.order);
@@ -22,7 +23,9 @@ const ManageOrders = () => {
         <h2>Manage Orders</h2>
         <div className="container">
           <p className="empty">There are no orders yet.</p>
-          <button className="btn btn--outlined">go back to home page</button>
+          <Link to="/" className="btn btn--outlined">
+            go back to home page
+          </Link>
         </div>
       </div>
     );

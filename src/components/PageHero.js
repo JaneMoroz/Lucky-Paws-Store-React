@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const PageHero = ({ page, type }) => {
   return (
     <Wrapper>
-      <div className={`section-center ${type === "page" && "page"}`}>
+      <div className={`section-center ${type === "products" && "products"}`}>
         <Link to="/" className="btn">
           <h1>Home</h1>
         </Link>

@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getMyReviews } from "../../features/review/reviewSlice";
 import { Loader, ManageItems } from "../../components";
+import { Link } from "react-router-dom";
 
 const MyReviews = () => {
   const { isLoading, reviews } = useSelector((store) => store.review);
@@ -21,7 +22,9 @@ const MyReviews = () => {
         <h2>My Reviews</h2>
         <div className="container">
           <p className="empty">There are no reviews yet.</p>
-          <button className="btn btn--outlined">Go back to home page</button>
+          <Link to="/all" className="btn btn--outlined">
+            back to store
+          </Link>
         </div>
       </div>
     );

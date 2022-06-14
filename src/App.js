@@ -1,5 +1,12 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Error, Home, Page, SingleProduct, Cart } from "./pages/";
+import {
+  Error,
+  Home,
+  SingleProduct,
+  Cart,
+  About,
+  ProductsPage,
+} from "./pages/";
 import { Navbar } from "./components/";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -22,10 +29,10 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="dog" element={<Page />} />
-        <Route path="cat" element={<Page />} />
-        <Route path="about" element={<Page />} />
-        <Route path="all" element={<Page />} />
+        <Route path="dog" element={<ProductsPage />} />
+        <Route path="cat" element={<ProductsPage />} />
+        <Route path="all" element={<ProductsPage />} />
+        <Route path="about" element={<About />} />
         <Route path="products/:id" element={<SingleProduct />} />
         <Route path="account" element={<SharedLayout />}>
           <Route index element={<Settings />} />

@@ -12,7 +12,7 @@ const Products = ({ products }) => {
     return (
       <Wrapper>
         <div className="container">
-          <p className="empty">No products found.</p>
+          <p className="empty">No products found. Try to clear filters.</p>
         </div>
       </Wrapper>
     );
