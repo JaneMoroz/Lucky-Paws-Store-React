@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import customFetch from "../../utils/axios";
+import customFetch, { checkForUnauthorizedResponse } from "../../utils/axios";
 import { toast } from "react-toastify";
 
 const initialFiltersState = {
@@ -70,7 +70,7 @@ export const addNewProduct = createAsyncThunk(
       const productData = res.data.data.data;
       return { productData };
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data.message);
+      return checkForUnauthorizedResponse(error, thunkAPI);
     }
   }
 );
@@ -81,7 +81,7 @@ export const deleteProduct = createAsyncThunk(
     try {
       await customFetch.delete(`/products/${productId}`);
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data.message);
+      return checkForUnauthorizedResponse(error, thunkAPI);
     }
   }
 );
@@ -168,7 +168,7 @@ const productSlice = createSlice({
       state.isLoading = false;
     },
     [deleteProduct.rejected]: (state, { payload }) => {
-      toast.success(`You don't have permission to perform this action!`);
+      toast.error(payload);
       state.isLoading = false;
     },
   },

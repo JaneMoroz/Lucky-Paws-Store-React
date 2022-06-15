@@ -92,6 +92,23 @@ const Auth = () => {
         >
           {isLoading ? "loading..." : "submit"}
         </button>
+        {values.isMember && (
+          <button
+            type="button"
+            className="btn btn--outlined"
+            disabled={isLoading}
+            onClick={() => {
+              dispatch(
+                loginUser({
+                  email: "test@test.com",
+                  password: `${process.env.REACT_APP_TESTUSER_PASSWORD}`,
+                })
+              );
+            }}
+          >
+            {isLoading ? "loading..." : "test user"}
+          </button>
+        )}
         <p>
           {values.isMember ? "Not a member yet?" : "Already a member?"}
           <button

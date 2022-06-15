@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import customFetch from "../../utils/axios";
+import customFetch, { checkForUnauthorizedResponse } from "../../utils/axios";
 import { toast } from "react-toastify";
 import {
   getCartFromLocalStorage,
@@ -29,6 +29,14 @@ const setCart = (state, cart) => {
   state.total = cart.total;
 };
 
+const calculateTotalQuantity = (cartData) => {
+  return cartData.products.reduce((total, cartItem) => {
+    const { quantity } = cartItem;
+    total += quantity;
+    return total;
+  }, 0);
+};
+
 export const getMyCart = createAsyncThunk(
   "cart/getMyCart",
   async (_, thunkAPI) => {
@@ -37,7 +45,7 @@ export const getMyCart = createAsyncThunk(
       const cartData = res.data.data.data;
       return { cartData };
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data.message);
+      return checkForUnauthorizedResponse(error, thunkAPI);
     }
   }
 );
@@ -50,7 +58,7 @@ export const updateMyCart = createAsyncThunk(
       const cartData = res.data.data.data;
       return { cartData };
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data.message);
+      return checkForUnauthorizedResponse(error, thunkAPI);
     }
   }
 );
@@ -59,6 +67,10 @@ const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
+    setCartIdAfterLogout: (state) => {
+      state.cartId = null;
+      addCartToLocalStorage(state);
+    },
     toggleCartItemsAreUpdated: (state) => {
       const oldValue = state.cartItemsUpdated;
       state.cartItemsUpdated = !oldValue;
@@ -133,14 +145,7 @@ const cartSlice = createSlice({
     [getMyCart.fulfilled]: (state, { payload }) => {
       if (payload.cartData.length !== 0) {
         setCart(state, payload.cartData[0]);
-        state.totalQuantity = payload.cartData[0].products.reduce(
-          (total, cartItem) => {
-            const { quantity } = cartItem;
-            total += quantity;
-            return total;
-          },
-          0
-        );
+        state.totalQuantity = calculateTotalQuantity(payload.cartData[0]);
       }
       addCartToLocalStorage(state);
       state.isLoading = false;
@@ -153,14 +158,7 @@ const cartSlice = createSlice({
       state.isLoading = true;
     },
     [updateMyCart.fulfilled]: (state, { payload }) => {
-      state.totalQuantity = payload.cartData.products.reduce(
-        (total, cartItem) => {
-          const { quantity } = cartItem;
-          total += quantity;
-          return total;
-        },
-        0
-      );
+      state.totalQuantity = calculateTotalQuantity(payload.cartData);
       setCart(state, payload.cartData);
       state.isLoading = false;
       addCartToLocalStorage(state);
@@ -173,6 +171,7 @@ const cartSlice = createSlice({
 });
 
 export const {
+  setCartIdAfterLogout,
   toggleCartItemsAreUpdated,
   clearCart,
   addItemToLocalCart,

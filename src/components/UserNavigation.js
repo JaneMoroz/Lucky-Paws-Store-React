@@ -4,7 +4,7 @@ import { userLinks, adminLinks } from "../utils/links";
 import { BsKeyFill } from "react-icons/bs";
 import { HiLogout } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
-import { logoutUser } from "../features/user/userSlice";
+import { clearAllAfterLogout } from "../features/user/userSlice";
 import { Link, NavLink } from "react-router-dom";
 
 const UserNavigation = () => {
@@ -32,7 +32,7 @@ const UserNavigation = () => {
           <Link
             to="/account/"
             className="btn btn--text btn--logout"
-            onClick={() => dispatch(logoutUser("Logging out..."))}
+            onClick={() => dispatch(clearAllAfterLogout("Logging out..."))}
           >
             <span className="icon">
               <HiLogout />

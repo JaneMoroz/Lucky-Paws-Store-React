@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import customFetch from "../../utils/axios";
+import customFetch, { checkForUnauthorizedResponse } from "../../utils/axios";
 import { toast } from "react-toastify";
 
 const initialState = {
@@ -17,7 +17,7 @@ export const getMyOrders = createAsyncThunk(
       const ordersData = res.data.data.data;
       return { ordersData };
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data.message);
+      return checkForUnauthorizedResponse(error, thunkAPI);
     }
   }
 );
@@ -30,7 +30,7 @@ export const getMyOrder = createAsyncThunk(
       const orderData = res.data.data.data;
       return { orderData };
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data.message);
+      return checkForUnauthorizedResponse(error, thunkAPI);
     }
   }
 );
@@ -43,7 +43,7 @@ export const getAllOrders = createAsyncThunk(
       const ordersData = res.data.data.data;
       return { ordersData };
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data.message);
+      return checkForUnauthorizedResponse(error, thunkAPI);
     }
   }
 );
@@ -56,7 +56,7 @@ export const getOrderById = createAsyncThunk(
       const orderData = res.data.data.data;
       return { orderData };
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data.message);
+      return checkForUnauthorizedResponse(error, thunkAPI);
     }
   }
 );
@@ -71,7 +71,7 @@ export const getCheckoutSession = createAsyncThunk(
       const sessionData = res.data.data.data;
       return { sessionData };
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data.message);
+      return checkForUnauthorizedResponse(error, thunkAPI);
     }
   }
 );
@@ -84,7 +84,7 @@ export const updateOrderToDelivered = createAsyncThunk(
       const orderData = res.data.data.data;
       return { orderData };
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data.message);
+      return checkForUnauthorizedResponse(error, thunkAPI);
     }
   }
 );

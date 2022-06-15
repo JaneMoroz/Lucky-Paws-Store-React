@@ -13,9 +13,11 @@ const OrderItem = ({
 }) => {
   let totalQuantity = cart.products[0].quantity;
   if (cart.products.length > 1) {
-    totalQuantity = cart.products.reduce(
-      (a, b) => Number(a.quantity) + Number(b.quantity)
-    );
+    totalQuantity = cart.products.reduce((total, product) => {
+      const { quantity } = product;
+      total += quantity;
+      return total;
+    }, 0);
   }
 
   const date = moment(created).format("MMM Do, YYYY");

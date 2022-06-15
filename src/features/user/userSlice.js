@@ -1,11 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-import customFetch from "../../utils/axios";
+import customFetch, { checkForUnauthorizedResponse } from "../../utils/axios";
 import {
   addUserToLocalStorage,
   getUserFromLocalStorage,
   removeUserFromLocalStorage,
 } from "../../utils/localStorage";
+import { setCartIdAfterLogout } from "../cart/cartSlice";
 
 const initialState = {
   isLoading: false,
@@ -59,10 +60,7 @@ export const updateUser = createAsyncThunk(
       const userData = res.data.data;
       return { userData };
     } catch (error) {
-      if (error.response.status === 401) {
-        return thunkAPI.rejectWithValue("Unauthorized! Logging Out...");
-      }
-      return thunkAPI.rejectWithValue(error.response.data.message);
+      return checkForUnauthorizedResponse(error, thunkAPI);
     }
   }
 );
@@ -75,10 +73,7 @@ export const updateUserPassword = createAsyncThunk(
       const userData = res.data;
       return { userData };
     } catch (error) {
-      if (error.response.status === 401) {
-        return thunkAPI.rejectWithValue("Unauthorized! Logging Out...");
-      }
-      return thunkAPI.rejectWithValue(error.response.data.message);
+      return checkForUnauthorizedResponse(error, thunkAPI);
     }
   }
 );
@@ -91,7 +86,20 @@ export const getAllUsers = createAsyncThunk(
       const usersData = res.data.data.data;
       return { usersData };
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data.message);
+      return checkForUnauthorizedResponse(error, thunkAPI);
+    }
+  }
+);
+
+export const clearAllAfterLogout = createAsyncThunk(
+  "user/clearAllAfterLogout",
+  async (message, thunkAPI) => {
+    try {
+      thunkAPI.dispatch(logoutUser(message));
+      thunkAPI.dispatch(setCartIdAfterLogout());
+      return Promise.resolve();
+    } catch (error) {
+      return Promise.reject();
     }
   }
 );
@@ -177,6 +185,9 @@ const userSlice = createSlice({
     [getAllUsers.rejected]: (state, { payload }) => {
       state.isLoading = false;
       toast.error(payload);
+    },
+    [clearAllAfterLogout.rejected]: () => {
+      toast.error("There was an error!");
     },
   },
 });

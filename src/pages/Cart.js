@@ -86,9 +86,7 @@ const Cart = () => {
               </div>
               <div className="quantity">
                 <button
-                  onClick={() =>
-                    handleQuantity(id, style && style, color && color, 1)
-                  }
+                  onClick={() => handleQuantity(id, style, color, 1)}
                   disabled={isLoading}
                   className="btn icon"
                 >
@@ -97,12 +95,7 @@ const Cart = () => {
                 <span>{quantity}</span>
                 <button
                   onClick={() =>
-                    handleQuantity(
-                      id,
-                      style && style,
-                      color && color,
-                      quantity > 1 ? -1 : 0
-                    )
+                    handleQuantity(id, style, color, quantity > 1 ? -1 : 0)
                   }
                   disabled={isLoading}
                   className="btn icon"
@@ -114,34 +107,41 @@ const Cart = () => {
             </div>
           );
         })}
+        {/* totals */}
         <div className="cart-total">
           <div className="line">
             <span>Subtotal:</span>
             <span>${subtotal}</span>
           </div>
           {user && (
-            <div className="line">
-              <span>Taxes:</span>
-              <span>${taxes}</span>
-            </div>
-          )}
-          {user && (
-            <div className="line">
-              <span>Shipping Price:</span>
-              <span>${shippingPrice}</span>
-            </div>
-          )}
-          {user && (
-            <div className="line total">
-              <span>Total:</span>
-              <span>${total}</span>
-            </div>
+            <>
+              <div className="line">
+                <span>Taxes:</span>
+                <span>${taxes}</span>
+              </div>
+              <div className="line">
+                <span>Shipping Price:</span>
+                <span>${shippingPrice}</span>
+              </div>
+              <div className="line total">
+                <span>Total:</span>
+                <span>${total}</span>
+              </div>
+            </>
           )}
         </div>
         {user && (
-          <button className="btn btn--outlined" onClick={goToCheckout}>
-            Pay
-          </button>
+          <>
+            <span className="test">Test card number: 4242 4242 4242 4242</span>
+            <button className="btn btn--outlined" onClick={goToCheckout}>
+              Pay
+            </button>
+          </>
+        )}
+        {!user && (
+          <Link to="/account" className="btn btn--outlined">
+            Login
+          </Link>
         )}
         <Link to="/all" className="btn btn--outlined">
           back to store

@@ -6,6 +6,7 @@ import {
   Cart,
   About,
   ProductsPage,
+  ProtectedRoute,
 } from "./pages/";
 import { Navbar } from "./components/";
 import { ToastContainer } from "react-toastify";
@@ -39,12 +40,54 @@ function App() {
           <Route path="my-orders" element={<MyOrders />} />
           <Route path="my-orders/:id" element={<Order />} />
           <Route path="my-reviews" element={<MyReviews />} />
-          <Route path="manage-products" element={<ManageProducts />} />
-          <Route path="manage-users" element={<ManageUsers />} />
-          <Route path="manage-reviews" element={<ManageReviews />} />
-          <Route path="manage-orders" element={<ManageOrders />} />
-          <Route path="manage-orders/:id" element={<Order />} />
-          <Route path="manage-products/add-product" element={<AddProduct />} />
+          <Route
+            path="manage-products"
+            element={
+              <ProtectedRoute>
+                <ManageProducts />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="manage-users"
+            element={
+              <ProtectedRoute>
+                <ManageUsers />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="manage-reviews"
+            element={
+              <ProtectedRoute>
+                <ManageReviews />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="manage-orders"
+            element={
+              <ProtectedRoute>
+                <ManageOrders />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="manage-orders/:id"
+            element={
+              <ProtectedRoute>
+                <Order />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="manage-products/add-product"
+            element={
+              <ProtectedRoute>
+                <AddProduct />
+              </ProtectedRoute>
+            }
+          />
         </Route>
         <Route path="cart" element={<Cart />} />
         <Route path="*" element={<Error />} />

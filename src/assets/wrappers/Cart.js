@@ -86,6 +86,11 @@ const Wrapper = styled.div`
     row-gap: 1rem;
     padding-bottom: 1rem;
   }
+
+  .test {
+    text-align: center;
+    color: var(--color-grey);
+  }
 `;
 
 export default Wrapper;

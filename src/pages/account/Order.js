@@ -81,8 +81,16 @@ const MyOrder = () => {
                     src={product.product.primaryImage}
                     alt={product.product.name}
                   />
-                  <h4>{product.product.name}</h4>
-                  <p>{product.purchasePrice}</p>
+                  <div>
+                    <h4>{product.product.name}</h4>
+                    {product.style && (
+                      <span className="additional-info">{`style: ${product.style}`}</span>
+                    )}
+                    {product.color && (
+                      <span className="additional-info">{`color: ${product.color}`}</span>
+                    )}
+                  </div>
+                  <p>${product.purchasePrice}</p>
                 </div>
               );
             }

@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import customFetch from "../../utils/axios";
+import customFetch, { checkForUnauthorizedResponse } from "../../utils/axios";
 import { toast } from "react-toastify";
 
 const initialState = {
@@ -15,7 +15,7 @@ export const getAllReviews = createAsyncThunk(
       const reviewsData = res.data.data.data;
       return { reviewsData };
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data.message);
+      return checkForUnauthorizedResponse(error, thunkAPI);
     }
   }
 );
@@ -28,7 +28,7 @@ export const getMyReviews = createAsyncThunk(
       const reviewsData = res.data.data.data;
       return { reviewsData };
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data.message);
+      return checkForUnauthorizedResponse(error, thunkAPI);
     }
   }
 );

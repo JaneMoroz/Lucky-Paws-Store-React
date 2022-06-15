@@ -27,6 +27,11 @@ const Wrapper = styled.div`
     padding: 1.4rem 2rem;
   }
 
+  .additional-info {
+    font-size: 1.4rem;
+    color: var(--color-grey);
+  }
+
   img {
     height: 5rem;
     width: 100%;
