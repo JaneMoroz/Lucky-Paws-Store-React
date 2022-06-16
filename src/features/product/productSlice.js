@@ -44,7 +44,6 @@ export const getProducts = createAsyncThunk(
       const productsData = res.data.data.data;
       return { productsData };
     } catch (error) {
-      console.log(error.response.data);
       return thunkAPI.rejectWithValue(error.response.data.message);
     }
   }

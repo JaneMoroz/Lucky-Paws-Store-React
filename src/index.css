@@ -396,26 +396,26 @@ ul {
   top: 0;
   left: 0;
   background-color: var(--background-1);
-  animation: expand-modified 1s ease-in-out;
+  animation: expand 1s ease-in-out;
 }
 
 .background--cats {
   top: 0;
   right: 0;
   background-color: var(--background-2);
-  animation: expand-modified 1s ease-in-out;
+  animation: expand 1s ease-in-out;
 }
 
 .background--all {
-  bottom: 0;
+  top: 0;
   left: 0;
   background-color: var(--background-3);
-  animation: expand-modified 1s ease-in-out;
+  animation: expand 1s ease-in-out;
 }
 
 .background--about {
   bottom: 0;
   right: 0;
   background-color: var(--background-4);
-  animation: expand-modified 1s ease-in-out;
+  animation: expand 1s ease-in-out;
 }
