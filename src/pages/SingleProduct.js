@@ -165,7 +165,7 @@ const SingleProduct = () => {
 
   return (
     <Wrapper className="container--max">
-      <PageHero page="for cats" />
+      <PageHero page="for all" />
       <div className="product-container">
         <div className="images">
           <img className="main-image" src={main} alt={name} />
