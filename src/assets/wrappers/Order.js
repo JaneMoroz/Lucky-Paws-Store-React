@@ -28,7 +28,8 @@ const Wrapper = styled.div`
   }
 
   .additional-info {
-    font-size: 1.4rem;
+    display: block;
+    font-size: 1.2rem;
     color: var(--color-grey);
   }
 

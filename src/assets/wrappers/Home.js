@@ -45,6 +45,7 @@ const Wrapper = styled.div`
 
   .img {
     transform: scale(100%);
+    backface-visibility: hidden;
     transition: all 0.4s;
   }
 
