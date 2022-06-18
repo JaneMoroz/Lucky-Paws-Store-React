@@ -7,6 +7,11 @@ const Wrapper = styled.div`
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
 
+  @media only screen and (max-width: 37.5em) {
+    display: flex;
+    flex-direction: column;
+  }
+
   .section {
     height: 100%;
     width: 100%;
