@@ -49,6 +49,13 @@ const Wrapper = styled.div`
     font-size: 3.6rem;
     color: #fff;
     background-color: var(--color-grey-transparent);
+
+    @media only screen and (hover: none) {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+    }
   }
 
   img {
