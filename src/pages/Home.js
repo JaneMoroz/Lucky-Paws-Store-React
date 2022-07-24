@@ -4,13 +4,19 @@ import img1 from "../assets/images/1.jpg";
 import img2 from "../assets/images/2.jpg";
 import img3 from "../assets/images/3.jpg";
 import img4 from "../assets/images/4.jpg";
+import img1Webp from "../assets/images/1.webp";
+import img2Webp from "../assets/images/2.webp";
+import img3Webp from "../assets/images/3.webp";
+import img4Webp from "../assets/images/4.webp";
 import { Link } from "react-router-dom";
+import { Image } from "../components";
 
 const Home = () => {
   return (
     <Wrapper className="container--max">
       <div className="section section--1">
-        <img className="img" src={img1} alt="for dogs" />
+        {/* <img className="img" src={img1} alt="for dogs" /> */}
+        <Image src={img1Webp} fallback={img1} alt="for dogs" />
         <Link to="/dog" className="btn">
           <h1 name="dog">
             for <span>dog</span>
@@ -18,7 +24,8 @@ const Home = () => {
         </Link>
       </div>
       <div className="section section--2">
-        <img className="img" src={img2} alt="for cats" />
+        <Image src={img2Webp} fallback={img2} alt="for cats" />
+        {/* <img className="img" src={img2} alt="for cats" /> */}
         <Link to="/cat" className="btn">
           <h1>
             for <span>cat</span>
@@ -26,7 +33,8 @@ const Home = () => {
         </Link>
       </div>
       <div className="section section--3">
-        <img className="img" src={img3} alt="all products" />
+        <Image src={img3Webp} fallback={img3} alt="all products" />
+        {/* <img className="img" src={img3} alt="all products" /> */}
         <Link to="/all" className="btn">
           <h1>
             <span>all</span> products
@@ -34,7 +42,8 @@ const Home = () => {
         </Link>
       </div>
       <div className="section section--4">
-        <img className="img" src={img4} alt="about" />
+        <Image src={img4Webp} fallback={img4} alt="about" />
+        {/* <img className="img" src={img4} alt="about" /> */}
         <Link to="/about" className="btn">
           <h1>
             <span>about</span>

@@ -10,6 +10,7 @@ import ManageItems from "./ManageItems";
 import Products from "./Products";
 import FiltersPanel from "./FiltersPanel";
 import Stars from "./Stars";
+import Image from "./Image";
 
 export {
   Navbar,
@@ -24,4 +25,5 @@ export {
   Products,
   FiltersPanel,
   Stars,
+  Image,
 };

@@ -3,7 +3,11 @@ import Wrapper from "../assets/wrappers/About";
 import img1 from "../assets/images/about-1.jpg";
 import img2 from "../assets/images/about-2.jpg";
 import img3 from "../assets/images/about-3.jpg";
+import img1Webp from "../assets/images/about-1.webp";
+import img2Webp from "../assets/images/about-2.webp";
+import img3Webp from "../assets/images/about-3.webp";
 import { Link } from "react-router-dom";
+import { Image } from "../components";
 
 const About = () => {
   return (
@@ -11,15 +15,18 @@ const About = () => {
       <div className="about-container">
         <div className="gallery">
           <div className="img img--1">
-            <img src={img1} alt="Our Store" />
+            <Image src={img1Webp} fallback={img1} alt="Our Store" />
+            {/* <img src={img1} alt="Our Store" /> */}
             <div className="image-overlay"></div>
           </div>
           <div className="img img--2">
-            <img src={img2} alt="Lucy and her cat" />
+            <Image src={img2Webp} fallback={img2} alt="Lucy and her cat" />
+            {/* <img src={img2} alt="Lucy and her cat" /> */}
             <div className="image-overlay"></div>
           </div>
           <div className="img img--3">
-            <img src={img3} alt="Lucy's cat - Boris" />
+            <Image src={img3Webp} fallback={img3} alt="Lucy's cat - Boris" />
+            {/* <img src={img3} alt="Lucy's cat - Boris" /> */}
             <div className="image-overlay"></div>
           </div>
         </div>
