@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Wrapper = styled.div`
+const Wrapper = styled.section`
   .orders-container {
     width: 100%;
     display: flex;

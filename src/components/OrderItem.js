@@ -24,7 +24,7 @@ const OrderItem = ({
 
   return (
     <Wrapper>
-      <div className="order">
+      <article className="order">
         <Link to={`${_id}`}>
           <h3>{date}</h3>
         </Link>
@@ -54,7 +54,7 @@ const OrderItem = ({
         <p className="address">
           {`${shippingAddress.address}, ${shippingAddress.city}, ${shippingAddress.postalCode}, ${shippingAddress.country}`}
         </p>
-      </div>
+      </article>
     </Wrapper>
   );
 };

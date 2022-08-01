@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Wrapper = styled.div`
+const Wrapper = styled.section`
   min-height: 100%;
   .container {
     background-color: #fff;

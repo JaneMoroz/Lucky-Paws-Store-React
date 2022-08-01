@@ -18,7 +18,7 @@ const ManageProducts = () => {
 
   if (users.length === 0) {
     return (
-      <div className="container--outlet">
+      <section className="container--outlet">
         <h2>Manage Users</h2>
         <div className="container">
           <p className="empty">Something went wrong!</p>
@@ -26,15 +26,15 @@ const ManageProducts = () => {
             Go back to home page
           </Link>
         </div>
-      </div>
+      </section>
     );
   }
 
   return (
-    <div className="container--outlet">
+    <section className="container--outlet">
       <h2>Manage Users</h2>
       <ManageItems items={users} type="users" />
-    </div>
+    </section>
   );
 };
 

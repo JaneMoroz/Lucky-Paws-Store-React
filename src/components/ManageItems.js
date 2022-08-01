@@ -1,5 +1,5 @@
 import React from "react";
-import { FaEye, FaRegTrashAlt } from "react-icons/fa";
+import { FaEye, FaRegTrashAlt } from "../utils/icons";
 import Wrapper from "../assets/wrappers/ManageItems";
 import defaultImage from "../assets/images/default.jpg";
 import { Link } from "react-router-dom";
@@ -28,7 +28,7 @@ const ManageItems = ({ items, type }) => {
           itemData.rating = item.rating;
         }
         return (
-          <div key={index} className="item">
+          <article key={index} className="item">
             {itemData.image && (
               <img
                 src={itemData.image}
@@ -55,7 +55,11 @@ const ManageItems = ({ items, type }) => {
             </div>
             <div className="btns-container">
               {type !== "reviews" && type !== "users" && (
-                <Link to={`/products/${itemData.id}`} className="btn">
+                <Link
+                  to={`/products/${itemData.id}`}
+                  className="btn"
+                  aria-label="more details"
+                >
                   <FaEye className="icon" />
                 </Link>
               )}
@@ -63,12 +67,13 @@ const ManageItems = ({ items, type }) => {
                 <button
                   onClick={() => dispatch(deleteProduct(itemData.id))}
                   className="btn"
+                  aria-label="delete"
                 >
                   <FaRegTrashAlt className="icon" />
                 </button>
               )}
             </div>
-          </div>
+          </article>
         );
       })}
     </Wrapper>

@@ -1,8 +1,7 @@
 import React from "react";
 import Wrapper from "../assets/wrappers/UserNavigation";
 import { userLinks, adminLinks } from "../utils/links";
-import { BsKeyFill } from "react-icons/bs";
-import { HiLogout } from "react-icons/hi";
+import { HiKey, HiLogout } from "../utils/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { clearAllAfterLogout } from "../features/user/userSlice";
 import { Link, NavLink } from "react-router-dom";
@@ -12,7 +11,7 @@ const UserNavigation = () => {
   const dispatch = useDispatch();
   return (
     <Wrapper>
-      <div className="menu menu--user">
+      <nav className="menu menu--user">
         {userLinks.map((link) => {
           return (
             <div key={link.id} className="menu-item">
@@ -40,12 +39,12 @@ const UserNavigation = () => {
             log out
           </Link>
         </div>
-      </div>
+      </nav>
       {(user.role === "admin" || user.role === "test") && <hr />}
       {(user.role === "admin" || user.role === "test") && (
-        <div className="menu">
+        <nav className="menu">
           <span className="admin">
-            <BsKeyFill />
+            <HiKey />
             admin
           </span>
           {adminLinks.map((link) => {
@@ -63,7 +62,7 @@ const UserNavigation = () => {
               </div>
             );
           })}
-        </div>
+        </nav>
       )}
     </Wrapper>
   );

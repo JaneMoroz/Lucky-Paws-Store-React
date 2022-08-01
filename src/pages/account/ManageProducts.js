@@ -47,38 +47,34 @@ const ManageProducts = () => {
 
   if (productsData.products.length === 0) {
     return (
-      <div className="container--outlet">
+      <section className="container--outlet">
         <h2>Manage Products</h2>
         <div className="container">
           <button className="btn btn--outlined">Add new product</button>
+          <p className="empty">There are no products.</p>
+        </div>
+      </section>
+    );
+  }
+
+  return (
+    <section className="container--outlet">
+      <h2>Manage Products</h2>
+      <div className="container">
+        <Link to="add-product" className="btn btn--outlined">
+          Add new product
+        </Link>
+        <form>
           <FormRow
             type="text"
             name="search"
             value={productsData.search}
             handleChange={handleChange}
           />
-          <p className="empty">There are no products.</p>
-        </div>
-      </div>
-    );
-  }
-
-  return (
-    <div className="container--outlet">
-      <h2>Manage Products</h2>
-      <div className="container">
-        <Link to="add-product" className="btn btn--outlined">
-          Add new product
-        </Link>
-        <FormRow
-          type="text"
-          name="search"
-          value={productsData.search}
-          handleChange={handleChange}
-        />
+        </form>
         <ManageItems items={productsData.products} type="products" />
       </div>
-    </div>
+    </section>
   );
 };
 

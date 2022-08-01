@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Wrapper = styled.div`
+const Wrapper = styled.section`
   grid-row: 2;
   grid-column: 1;
 

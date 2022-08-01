@@ -19,7 +19,7 @@ const ManageOrders = () => {
 
   if (allOrders.length === 0) {
     return (
-      <div>
+      <section>
         <h2>Manage Orders</h2>
         <div className="container">
           <p className="empty">There are no orders yet.</p>
@@ -27,19 +27,19 @@ const ManageOrders = () => {
             go back to home page
           </Link>
         </div>
-      </div>
+      </section>
     );
   }
 
   return (
-    <div>
+    <section>
       <h2>Manage Orders</h2>
       <div className="container">
         {allOrders.map((order) => {
           return <OrderItem key={order._id} {...order} />;
         })}
       </div>
-    </div>
+    </section>
   );
 };
 

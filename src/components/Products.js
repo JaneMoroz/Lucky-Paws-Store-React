@@ -1,8 +1,8 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import Wrapper from "../assets/wrappers/Products";
 import Stars from "../components/Stars";
-import { BsSearch } from "react-icons/bs";
+import { BsSearch } from "../utils/icons";
 import { Link } from "react-router-dom";
 
 const Products = ({ products }) => {
@@ -23,12 +23,13 @@ const Products = ({ products }) => {
       <div className={`products-container ${grid_view ? "grid" : ""}`}>
         {products.map((product, index) => {
           return (
-            <div key={index} className="product">
+            <article key={index} className="product">
               <div className="image-container">
                 <img src={product.primaryImage} alt={product.name} />
                 <Link
                   to={`/products/${product._id}`}
                   className="btn btn--details"
+                  aria-label="more details"
                 >
                   <BsSearch />
                 </Link>
@@ -55,7 +56,7 @@ const Products = ({ products }) => {
                   details
                 </Link>
               </div>
-            </div>
+            </article>
           );
         })}
       </div>

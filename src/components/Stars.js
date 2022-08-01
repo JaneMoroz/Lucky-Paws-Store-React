@@ -1,5 +1,5 @@
 import React from "react";
-import { BsStarFill, BsStarHalf, BsStar } from "react-icons/bs";
+import { BsStarFill, BsStarHalf, BsStar } from "../utils/icons";
 import Wrapper from "../assets/wrappers/Stars";
 
 const Stars = ({ stars, reviews }) => {

@@ -71,12 +71,12 @@ const MyOrder = () => {
       </h2>
       <div className="order-container">
         <p className="date">{date}</p>
-        <div className="products">
+        <ul className="products">
           {cart.products.map((product, index) => {
             let templateArray = [];
             for (let i = 0; i < product.quantity; i++) {
               templateArray.push(
-                <div key={index + i} className="product-item">
+                <li key={index + i} className="product-item">
                   <img
                     src={product.product.primaryImage}
                     alt={product.product.name}
@@ -91,12 +91,12 @@ const MyOrder = () => {
                     )}
                   </div>
                   <p>${product.purchasePrice}</p>
-                </div>
+                </li>
               );
             }
             return templateArray;
           })}
-        </div>
+        </ul>
         <div className="order-total">
           <p>
             Subtotal: <span>${cart.subtotal}</span>

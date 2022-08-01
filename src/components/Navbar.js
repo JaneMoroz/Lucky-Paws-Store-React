@@ -4,7 +4,7 @@ import {
   HiOutlineUserCircle,
   HiOutlineHeart,
   HiOutlineShoppingBag,
-} from "react-icons/hi";
+} from "../utils/icons";
 import { useSelector } from "react-redux";
 import Wrapper from "../assets/wrappers/Navbar";
 
@@ -17,18 +17,18 @@ const Navbar = () => {
           Lucky Paws
         </Link>
       </div>
-      <div className="btns-container">
-        <button className="btn" type="button">
+      <nav className="btns-container">
+        <button aria-label="favorites" className="btn" type="button">
           <HiOutlineHeart className="icon" />
         </button>
-        <Link to="account/" className="btn">
+        <Link aria-label="account" to="account/" className="btn">
           <HiOutlineUserCircle className="icon" />
         </Link>
-        <Link to="cart" className="btn">
+        <Link aria-label="cart" to="cart" className="btn">
           <HiOutlineShoppingBag className="icon" />
           <span className="cart">{totalQuantity}</span>
         </Link>
-      </div>
+      </nav>
     </Wrapper>
   );
 };

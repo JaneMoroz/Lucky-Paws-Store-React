@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Wrapper from "../../assets/wrappers/AddNewProduct";
 import { FormRow, FormRowSelect } from "../../components";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
@@ -109,7 +108,7 @@ const AddProduct = () => {
   };
 
   return (
-    <Wrapper>
+    <section>
       <h2>Add New Product</h2>
       <form className="form" onSubmit={handleSubmit}>
         <div className="form-center">
@@ -212,7 +211,7 @@ const AddProduct = () => {
           {isLoading ? "adding..." : "add"}
         </button>
       </form>
-    </Wrapper>
+    </section>
   );
 };
 

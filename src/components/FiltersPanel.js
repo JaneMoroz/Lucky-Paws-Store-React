@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Wrapper from "../assets/wrappers/FiltersPanel";
-import { BsGrid3X2GapFill, BsList } from "react-icons/bs";
-import { MdClose } from "react-icons/md";
-import { HiOutlineFilter } from "react-icons/hi";
+import {
+  BsGrid3X2GapFill,
+  BsList,
+  MdClose,
+  HiOutlineFilter,
+} from "../utils/icons";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setGrid,
@@ -83,6 +86,7 @@ const FiltersPanel = () => {
         <button
           className="btn close"
           onClick={() => dispatch(openFiltersPanel())}
+          aria-label="filter"
         >
           <HiOutlineFilter />
         </button>
@@ -94,6 +98,7 @@ const FiltersPanel = () => {
         <button
           className="btn close"
           onClick={() => dispatch(closeFiltersPanel())}
+          aria-label="close"
         >
           <MdClose />
         </button>
@@ -106,12 +111,14 @@ const FiltersPanel = () => {
             <button
               onClick={() => dispatch(setGrid())}
               className={`btn icon ${grid_view ? "active" : ""}`}
+              aria-label="grid showcase"
             >
               <BsGrid3X2GapFill />
             </button>
             <button
               onClick={() => dispatch(setList())}
               className={`btn icon ${grid_view ? "" : "active"}`}
+              aria-label="list showcase"
             >
               <BsList />
             </button>

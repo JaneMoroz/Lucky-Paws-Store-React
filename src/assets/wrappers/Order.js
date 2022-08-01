@@ -1,14 +1,15 @@
 import styled from "styled-components";
 
-const Wrapper = styled.div`
+const Wrapper = styled.article`
   padding: 2.4rem 3.2rem;
   display: flex;
   flex-direction: column;
   row-gap: 2rem;
   align-items: center;
 
-  .order-id {
-    @media only screen and (max-width: 37.5em) {
+  @media only screen and (max-width: 37.5em) {
+    padding: 2.4rem 0;
+    .order-id {
       font-size: 2rem;
       font-weight: 500;
     }
@@ -21,7 +22,7 @@ const Wrapper = styled.div`
 
   .product-item {
     display: grid;
-    grid-template-columns: 5rem 1fr 2rem;
+    grid-template-columns: 5rem 1fr max-content;
     align-items: center;
     column-gap: 1.2rem;
     padding: 1.4rem 2rem;

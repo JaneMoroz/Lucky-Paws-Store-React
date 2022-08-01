@@ -4,7 +4,7 @@ import Wrapper from "../assets/wrappers/SingleProduct";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductById } from "../features/product/productSlice";
 import { Loader, PageHero, Stars } from "../components";
-import { HiMinus, HiPlus } from "react-icons/hi";
+import { FiMinus, FiPlus } from "../utils/icons";
 import { updateFilter } from "../features/product/productSlice";
 import {
   toggleCartItemsAreUpdated,
@@ -166,7 +166,7 @@ const SingleProduct = () => {
   return (
     <Wrapper className="container--max">
       <PageHero page="for all" />
-      <div className="product-container">
+      <article className="product-container">
         <div className="images">
           <img className="main-image" src={main} alt={name} />
           <div className="gallery">
@@ -262,12 +262,20 @@ const SingleProduct = () => {
             )}
             <div className="main-footer">
               <div className="quantity">
-                <button onClick={() => handleQuantity("dec")} className="btn">
-                  <HiMinus className="icon" />
+                <button
+                  onClick={() => handleQuantity("dec")}
+                  className="btn"
+                  aria-label="decrease quantity"
+                >
+                  <FiMinus className="icon" />
                 </button>
                 <span>{quantity}</span>
-                <button onClick={() => handleQuantity("inc")} className="btn">
-                  <HiPlus className="icon" />
+                <button
+                  onClick={() => handleQuantity("inc")}
+                  className="btn"
+                  aria-label="increase quantity"
+                >
+                  <FiPlus className="icon" />
                 </button>
               </div>
               <p className="price">${price}</p>
@@ -284,7 +292,7 @@ const SingleProduct = () => {
             back to store
           </Link>
         </div>
-      </div>
+      </article>
     </Wrapper>
   );
 };

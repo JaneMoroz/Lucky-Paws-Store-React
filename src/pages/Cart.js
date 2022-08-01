@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import Wrapper from "../assets/wrappers/Cart";
 import { useSelector, useDispatch } from "react-redux";
 import { PageHero } from "../components";
-import { HiChevronUp, HiChevronDown } from "react-icons/hi";
+import { HiChevronUp, HiChevronDown } from "../utils/icons";
 import { Link } from "react-router-dom";
 import {
   updateCartItemQuantity,
@@ -77,7 +77,7 @@ const Cart = () => {
           const { id, name, primaryImage } = cartItem.product;
           const { purchasePrice, quantity, style, color } = cartItem;
           return (
-            <div key={index} className="cart-item">
+            <article key={index} className="cart-item">
               <img src={primaryImage} alt={name} />
               <div className="text">
                 <h3>{name}</h3>
@@ -89,6 +89,7 @@ const Cart = () => {
                   onClick={() => handleQuantity(id, style, color, 1)}
                   disabled={isLoading}
                   className="btn icon"
+                  aria-label="increase quantity"
                 >
                   <HiChevronUp />
                 </button>
@@ -99,12 +100,13 @@ const Cart = () => {
                   }
                   disabled={isLoading}
                   className="btn icon"
+                  aria-label="decrease quantity"
                 >
                   <HiChevronDown />
                 </button>
               </div>
               <span className="price">${purchasePrice}</span>
-            </div>
+            </article>
           );
         })}
         {/* totals */}

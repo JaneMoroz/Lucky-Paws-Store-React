@@ -18,7 +18,7 @@ const MyReviews = () => {
 
   if (reviews.length === 0) {
     return (
-      <div className="container--outlet">
+      <section className="container--outlet">
         <h2>My Reviews</h2>
         <div className="container">
           <p className="empty">There are no reviews yet.</p>
@@ -26,15 +26,15 @@ const MyReviews = () => {
             back to store
           </Link>
         </div>
-      </div>
+      </section>
     );
   }
 
   return (
-    <div className="container--outlet">
+    <section className="container--outlet">
       <h2>My Reviews</h2>
       <ManageItems items={reviews} type="reviews" />
-    </div>
+    </section>
   );
 };
 

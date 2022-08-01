@@ -1,9 +1,16 @@
-import { BsGear, BsCart, BsStar, BsCreditCard, BsFolder } from "react-icons/bs";
-import { HiOutlineUsers, HiOutlineCash } from "react-icons/hi";
+// import { BsGear, BsCart, BsStar, BsCreditCard, BsFolder } from "react-icons/bs";
+// import { HiOutlineUsers, HiOutlineCash } from "react-icons/hi";
+import { BsGear } from "@react-icons/all-files/bs/BsGear";
+// import { BsCart } from "@react-icons/all-files/bs/BsCart";
+import { BsStar } from "@react-icons/all-files/bs/BsStar";
+import { BsCreditCard } from "@react-icons/all-files/bs/BsCreditCard";
+import { BsFolder } from "@react-icons/all-files/bs/BsFolder";
+import { HiOutlineUsers } from "@react-icons/all-files/hi/HiOutlineUsers";
+import { HiOutlineCash } from "@react-icons/all-files/hi/HiOutlineCash";
 
 export const userLinks = [
   { id: 1, text: "settings", path: "/account/", icon: <BsGear /> },
-  { id: 2, text: "my orders", path: "my-orders", icon: <BsCart /> },
+  { id: 2, text: "my orders", path: "my-orders", icon: <BsGear /> },
   { id: 3, text: "my reviews", path: "my-reviews", icon: <BsStar /> },
   {
     id: 4,
