@@ -72,6 +72,7 @@ const Wrapper = styled.div`
       color: var(--color-text-primary-light);
       margin-bottom: 2rem;
       line-height: 1.8;
+      text-transform: none;
     }
 
     .secondary {

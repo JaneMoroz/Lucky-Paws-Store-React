@@ -13,7 +13,7 @@ const About = () => {
   return (
     <Wrapper className="container--max">
       <div className="about-container">
-        <div className="gallery">
+        <section className="gallery">
           <div className="img img--1">
             <Image src={img1Webp} fallback={img1} alt="Our Store" />
             {/* <img src={img1} alt="Our Store" /> */}
@@ -29,23 +29,25 @@ const About = () => {
             {/* <img src={img3} alt="Lucy's cat - Boris" /> */}
             <div className="image-overlay"></div>
           </div>
-        </div>
-        <div className="text">
-          <p className="main">
+        </section>
+        <section className="text">
+          {/* <p className="main">
             Hi! My name is Lucy and I'm an owner of Lucky Paws Store.
-          </p>
+          </p> */}
+          <h1 className="main">
+            Hi! My name is Lucy and I'm an owner of Lucky Paws Store.
+          </h1>
           <p className="secondary">
             One of the greatest advantages in starting a pet shop business is a
-            chance to share your animal passion with others. Lorem, ipsum dolor
-            sit amet consectetur adipisicing elit. Quas, architecto iusto
-            suscipit provident commodi neque tempora aperiam nobis dolore, eos
-            debitis eligendi aut ipsa consequatur est repellat! Ducimus, modi
-            sint?
+            chance to share your animal passion with others. My mission is to
+            service the community and their pets with outstanding services and
+            high quality products. Lucky paws store offers a variety of brands
+            of dry, wet, treats, toys, raw and fresh food, aquatics, and more.
           </p>
           <Link to="/all" className="btn btn--outlined">
             Back to store
           </Link>
-        </div>
+        </section>
       </div>
       <div className={`background background--about`}></div>
     </Wrapper>

@@ -1,18 +1,22 @@
 import styled from "styled-components";
 
-const Wrapper = styled.div`
-  height: calc(100vh - 8rem);
-  min-height: 60rem;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-
-  @media only screen and (max-width: 37.5em) {
-    display: flex;
-    flex-direction: column;
+const Wrapper = styled.nav`
+  .nav-list {
+    height: calc(100vh - 8rem);
+    min-height: 60rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
   }
 
-  .section {
+  @media only screen and (max-width: 37.5em) {
+    .nav-list {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  .nav-item {
     height: 100%;
     width: 100%;
     overflow: hidden;
@@ -32,19 +36,19 @@ const Wrapper = styled.div`
     justify-content: center;
   }
 
-  .section--1 .btn {
+  .nav-item--1 .btn {
     background-color: var(--background-1);
   }
 
-  .section--2 .btn {
+  .nav-item--2 .btn {
     background-color: var(--background-2);
   }
 
-  .section--3 .btn {
+  .nav-item--3 .btn {
     background-color: var(--background-3);
   }
 
-  .section--4 .btn {
+  .nav-item--4 .btn {
     background-color: var(--background-4);
   }
 
@@ -54,7 +58,7 @@ const Wrapper = styled.div`
     transition: all 0.4s;
   }
 
-  .section:hover .img {
+  .nav-item:hover .img {
     transform: scale(105%);
   }
 `;
